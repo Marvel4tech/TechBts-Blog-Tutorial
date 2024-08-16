@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { nav } from '../../data'
 
 const DemoHeader = () => {
+    const [isActive, setIsActive] = useState(false)
+
+    useEffect(() => {
+        const scrollMe = () => {
+            window.scrollY > 50 ? setIsActive(true) : setIsActive(false)
+        }
+        window.addEventListener("scroll", scrollMe())
+    }, [])
 
   return (
-    <header className=' border-b border-black sticky top-0 z-50 bg-banner'>
+    <header className={`border-b border-black sticky top-0 z-50 ${isActive ? "bg-white" : "bg-banner"} transition-all duration-500`}>
         <div className=' size h-[70px] flex items-center justify-between'>
            <div>
                 <Link className=' font-bold text-[2.5rem]' to={'/'}>TechBTS</Link>
@@ -23,7 +31,7 @@ const DemoHeader = () => {
                         Sign In
                     </button>
                 </div>
-                <button className=' bg-black text-white rounded-full px-3 p-2 text-sm font-medium'>
+                <button className={` bg-black text-white rounded-full px-3 p-2 text-sm font-medium ${isActive ? "bg-green-700" : "bg-black"}`}>
                     Get Started
                 </button>
            </div>
