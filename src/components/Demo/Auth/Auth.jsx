@@ -9,7 +9,7 @@ import SignUp from './SignUp';
 
 const Button = ({icon, text, click}) => {
     return(
-        <button className=' flex items-center gap-10 sm:w-[20rem] border border-black px-3 py-2 rounded-full'>
+        <button onClick={click} className=' flex items-center gap-10 sm:w-[20rem] border border-black px-3 py-2 rounded-full'>
             {icon} {text}
         </button>
     )
@@ -18,11 +18,15 @@ const Button = ({icon, text, click}) => {
 const Auth = () => {
     const [createUser, setCreateUser] = useState(false)
     const [signReq, setSignReq] = useState('')
+    const [modal, setModal] = useState(true)
+
+    const hidden = modal ? "visible opacity-100" : "invisible opacity-0" 
 
   return (
-    <Modal>
-        <section className=' z-50 fixed top-0 bottom-0 left-0 md:left-[10rem] right-0 md:right-[10rem] overflow-auto bg-white shadow-xl'>
-           <button className=' absolute top-8 right-8 text-2xl hover:opacity-50'>
+    <Modal modal={modal} setModal={setModal} hidden={hidden}>
+        <section className={`z-50 fixed top-0 bottom-0 left-0 md:left-[10rem] right-0 md:right-[10rem] overflow-auto bg-white 
+        shadow-xl ${hidden} transition-all duration-500`}>
+           <button className=' absolute top-8 right-8 text-2xl hover:opacity-50' onClick={() => setModal(false)}>
                 <LiaTimesSolid/>
             </button>
             <div className=' flex flex-col justify-center items-center gap-[3rem]'>
@@ -37,7 +41,8 @@ const Auth = () => {
                             <Button icon={<MdFacebook className=' text-xl text-blue-600' />} text={`${createUser ? "Sign Up" : "Sign In"} With Facebook`}/>
                         </div>
                         <div>
-                            <Button icon={<AiOutlineMail className=' text-xl' />} text={`${createUser ? "Sign Up" : "Sign In"} With Email`}/>
+                            <Button click={() => setSignReq(createUser ? "sign-up" : "sign-in")} icon={<AiOutlineMail className=' text-xl' />} 
+                                text={`${createUser ? "Sign Up" : "Sign In"} With Email`}/>
                         </div>
                     </div>
                     <p>
@@ -48,9 +53,9 @@ const Auth = () => {
                     </p>
                   </>
                 ) : signReq === "sign-in" ? (
-                    <SignIn />
+                    <SignIn setSignReq={setSignReq} />
                 ) : signReq === "sign-up" ? (
-                    <SignUp />
+                    <SignUp setSignReq={setSignReq} />
                 ) : null }
                 <p className='md:w-[30rem] mx-auto text-center mb-[3rem]'>
                     Click "Sign In" to agree to TechBTS's Terms of Service and 
