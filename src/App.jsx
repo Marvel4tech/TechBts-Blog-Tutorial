@@ -3,10 +3,11 @@ import Home from "./components/Home/Home"
 import { Navigate, Route, Routes } from "react-router-dom"
 import HomeHeader from "./components/Home/HomeHeader"
 import DemoHeader from "./components/Demo/DemoHeader"
+import { Blog } from "./context/Context"
 
 
 function App() {
-  const currentUser = false
+  const {currentUser} = Blog()
 
   return (
     <main className=" font-poppins">
