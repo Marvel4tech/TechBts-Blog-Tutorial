@@ -11,7 +11,10 @@ const DemoHeader = () => {
         const scrollMe = () => {
             window.scrollY > 50 ? setIsActive(true) : setIsActive(false)
         }
-        window.addEventListener("scroll", scrollMe())
+        window.addEventListener("scroll", scrollMe)
+        return () => {
+            window.removeEventListener("scroll", scrollMe)
+        }
     }, [])
 
   return (

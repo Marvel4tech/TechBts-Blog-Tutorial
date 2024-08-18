@@ -15,3 +15,28 @@ export const nav = [
         path: "/",
     },
 ]
+
+export const discover = [
+    "Technology",
+    "AI and ML",
+    "Deals",
+    "Discounts",
+    "Comparisons",
+    "Review",
+    "Video",
+    "Chipsets",
+    "Now Available"
+]
+
+export const discoverActions = [
+    "Teams",
+    "Help",
+    "Status",
+    "Writers",
+    "Blog",
+    "Careers",
+    "Privacy",
+    "Terms",
+    "Text to speech",
+    "About"
+]
