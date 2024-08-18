@@ -1,67 +1,13 @@
+import Banner from "./Banner"
+import Trending from "./Trending"
 
 
 const Demo = () => {
   return (
-    <div>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-        <h1>Demo</h1>
-    </div>
+    <>
+      <Banner />
+      <Trending />
+    </>
   )
 }
 
