@@ -7,7 +7,7 @@ import { Blog } from "../../context/Context"
 import { Link } from "react-router-dom"
 import { secretEmail } from "../../utilities/helper"
 
-const UserModal = () => {
+const UserModal = (setModal) => {
     const { currentUser } = Blog()
 
     const userModal = [
@@ -41,7 +41,7 @@ const UserModal = () => {
         </Link>
         <div className=" flex flex-col gap-4 border-b border-gray-400 pb-5">
             {userModal.map((link, i) => (
-                <Link key={i} path={link.path} className=" flex items-center gap-2 text-gray-500 hover:text-black/70">
+                <Link onClick={() => setModal(false)} key={i} to={link.path} className=" flex items-center gap-2 text-gray-500 hover:text-black/70">
                     <span className=" text-2xl">{link.icon}</span>
                     <h2 className=" text-base">{link.title}</h2>
                 </Link>

@@ -4,7 +4,6 @@ import { LiaEditSolid } from "react-icons/lia"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { Link } from "react-router-dom"
-import Search from "./Header/Search"
 import Modal from "../../utilities/Modal"
 import { useState } from "react"
 import UserModal from "./UserModal"
@@ -19,7 +18,6 @@ const HomeHeader = () => {
             <Link to={'/'}>
                 <span className=" text-5xl"><BsMedium /></span>
             </Link>
-            <Search />
           </div>
           <div className=" flex items-center gap-3 sm:gap-7">
             <Link className=" hidden md:flex items center gap-1 text-gray-500" to={'/write'}>
@@ -32,20 +30,21 @@ const HomeHeader = () => {
             <div className="flex items-center relative">
               <img
                 onClick={() => setModal(true)}
-                className="w-[2.3rem] h-[2.3rem] rounded-full bg-slate-200 cursor-pointer object-cover"
+                className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
                 src="/profile.png"
-                alt="profile-pix"
+                alt="profile-img"
               />
               <span className="text-gray-500 cursor-pointer">
                 <MdKeyboardArrowDown />
               </span>
-              {modal && (
-                <Modal setModal={setModal}>
-                  <div className="visible opacity-100% transition-all duration-500">
-                    <UserModal />
-                  </div>
-                </Modal>
-              )}
+              <Modal modal={modal} setModal={setModal}>
+                <div
+                  className={`${
+                    modal ? "visible opacity-100%" : "invisible opacity-0"
+                  } transition-all duration-100`}>
+                  <UserModal setModal={setModal} />
+                </div>
+              </Modal>
             </div>
           </div>
       </div>
