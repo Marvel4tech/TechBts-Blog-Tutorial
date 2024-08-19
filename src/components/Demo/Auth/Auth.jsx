@@ -83,9 +83,9 @@ const Auth = ({ modal, setModal }) => {
                     </p>
                   </>
                 ) : signReq === "sign-in" ? (
-                    <SignIn setSignReq={setSignReq} />
+                    <SignIn setModal={setModal} setSignReq={setSignReq} />
                 ) : signReq === "sign-up" ? (
-                    <SignUp setSignReq={setSignReq} />
+                    <SignUp setModal={setModal} setSignReq={setSignReq} />
                 ) : null }
                 <p className='md:w-[30rem] mx-auto text-center mb-[3rem]'>
                     Click "Sign In" to agree to TechBTS's Terms of Service and 

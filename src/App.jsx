@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import HomeHeader from "./components/Home/HomeHeader"
 import DemoHeader from "./components/Demo/DemoHeader"
 import { Blog } from "./context/Context"
+import { ToastContainer } from "react-toastify"
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   return (
     <main className=" font-poppins">
       { currentUser ? <HomeHeader /> : <DemoHeader /> }
+      <ToastContainer />
       <Routes>
         {currentUser && <Route path="/" element={<Home />} />}
         {!currentUser && <Route path="/demo" element={<Demo />} />}
