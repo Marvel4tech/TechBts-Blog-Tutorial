@@ -3,6 +3,10 @@ import ProfileHome from "./Activities/ProfileHome"
 import ProfileLists from "./Activities/ProfileLists"
 import ProfileAbout from "./Activities/ProfileAbout"
 import Modal from "../../../utilities/Modal"
+import { LiaTimesSolid } from "react-icons/lia"
+import { discoverActions } from "../../../data"
+import { IoSettingsSharp } from "react-icons/io5"
+import EditProfile from "./Activities/EditProfile"
 
 
 const Profile = () => {
@@ -22,7 +26,8 @@ const Profile = () => {
     ]
 
     const [currentActive, setCurrentActive] = useState(activities[0])
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
+    const [editModal, setEditModal] = useState(false)
 
   return (
     <section className=" size flex gap-[4rem] relative">
@@ -43,12 +48,33 @@ const Profile = () => {
             </div>
             <currentActive.component />
         </div>
+        <button onClick={() => setModal(true)} className=" fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center md:hidden">
+            {<IoSettingsSharp />}
+        </button>
         <Modal modal={modal} setModal={setModal}>
-            <div className={` flex-1 border-l border-gray-300 p-[2rem] 
-            z-10 fixed right-0 bottom-0 top-0 bg-white w-[18rem] md:relative ${modal ? "translate-x-0" : "translate-x-[100%] md:translate-x-0"}`}>
-                Profile Details
+            <div className={` flex-1 border-l border-gray-300 p-[2rem] z-10 fixed right-0 bottom-0 top-0 bg-white w-[18rem] md:relative 
+            ${modal ? "translate-x-0" : "translate-x-[100%] md:translate-x-0"} transition-all duration-500`}>
+                <div className=" pb-4 text-right">
+                    <button onClick={() => setModal(false)} className=" inline-block md:hidden">
+                        <LiaTimesSolid />
+                    </button>
+                </div>
+                <div className=" sticky top-7 flex flex-col justify-between">
+                    <img className=" w-[3.5rem] h-[3.5rem] rounded-full object-cover" src="/profile.png" alt="profile-pix" />
+                    <h2 className=" py-2 font-bold capitalize">Marvel Ayo</h2>
+                    <p className=" first-letter:uppercase text-sm text-gray-500">I am web developer and Software Enginneer.</p>
+                    <button onClick={() => setEditModal(true)} className=" text-green-700 w-fit pt-6 text-sm">Edit Profile</button>
+                    <div className=" flex-[1] flex items-center flex-wrap gap-3 pt-8">
+                        {discoverActions.map((item, i) => (
+                            <button className=" text-xs text-black1" key={i}>{item}</button>
+                        ))}
+                    </div>
+                </div>
             </div>
         </Modal>
+        {editModal && (
+            <EditProfile editModal={editModal} setEditModal={setEditModal} />
+        )}
     </section>
   )
 }
