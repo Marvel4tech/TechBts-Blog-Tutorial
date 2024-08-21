@@ -15,6 +15,8 @@ const Profile = () => {
     const { allUsers } = Blog()
     const { userId } = useParams()
 
+    const getUserData = allUsers.find((user) => user.id === userId)
+
     const activities = [
         {
             title: "Home",
@@ -39,7 +41,7 @@ const Profile = () => {
         <div className=" mt-[9rem] flex-[2]">
             <div className=" flex items-end gap-4">
                 <h2 className=" text-3xl font-bold sm:text-5xl capitalize">
-                    Milad Tech
+                   {getUserData?.username}
                 </h2>
                 <p className=" text-gray-500 text-xs sm:text-sm">Followers(2)</p>
                 <p className=" text-gray-500 text-xs sm:text-sm">Following(2)</p>

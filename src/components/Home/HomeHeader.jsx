@@ -7,12 +7,18 @@ import { Link } from "react-router-dom"
 import Modal from "../../utilities/Modal"
 import { useState } from "react"
 import UserModal from "./UserModal"
+import { Blog } from "../../context/Context"
+import Loading from "../Loading/Loading"
 
 const HomeHeader = () => {
+  const { allUsers, userLoading, currentUser } = Blog()
   const [modal, setModal] = useState(false)
+
+  const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
 
   return (
     <header className=" border-gray-200 border-b">
+      {userLoading && <Loading />}
       <div className=" size flex items-center justify-between h-[60px]">
           <div className=" flex items-center gap-3">
             <Link to={'/'}>
@@ -31,7 +37,7 @@ const HomeHeader = () => {
               <img
                 onClick={() => setModal(true)}
                 className="w-[2.3rem] h-[2.3rem] object-cover rounded-full cursor-pointer"
-                src="/profile.png"
+                src={getUserData?.userImg ? getUserData?.userImg : "/profile.png"}
                 alt="profile-img"
               />
               <span className="text-gray-500 cursor-pointer">
