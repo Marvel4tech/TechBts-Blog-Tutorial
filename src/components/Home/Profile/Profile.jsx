@@ -53,7 +53,7 @@ const Profile = () => {
                     </div>
                 ))}
             </div>
-            <currentActive.component getUserData={getUserData} />
+            <currentActive.component getUserData={getUserData} setEditModal={setEditModal} />
         </div>
         <button onClick={() => setModal(true)} className=" fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center md:hidden">
             {<IoSettingsSharp />}

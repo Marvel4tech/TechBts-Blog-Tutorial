@@ -6,9 +6,14 @@ import { useRef, useState } from "react"
 const EditProfile = ({editModal, setEditModal}) => {
     const imgRef = useRef(null)
     const [imageUrl, setImageUrl] = useState("")
+    const [form, setForm] = useState({username:"", userImg:"", bio:""})
 
     const openFile = () => {
         imgRef.current.click()
+    }
+
+    const saveForm = () => {
+        console.log(form)
     }
 
     const btn = " border border-green-600 py-2 px-5 rounded-full text-green-600"
@@ -29,8 +34,13 @@ const EditProfile = ({editModal, setEditModal}) => {
                         <img className=" min-h-[5rem] min-w-[5rem] object-cover border border-gray-400 rounded-full" 
                           src={imageUrl ? imageUrl : "/profile.png"} alt="profile-pix" 
                         />
-                        <input onChange={(e) => setImageUrl(URL.createObjectURL(e.target.files[0]))} accept="image.png, image/jpg, image/jpeg" 
-                        ref={imgRef} type="file" hidden />
+                        <input 
+                            onChange={(e) => {setImageUrl(URL.createObjectURL(e.target.files[0])); 
+                                setForm({...form, userImg: e.target.files[0]})
+                                }} 
+                            accept="image.png, image/jpg, image/jpeg" 
+                            ref={imgRef} type="file" hidden 
+                        />
                     </div>
                     <div>
                         <div className=" flex gap-4 text-sm">
@@ -47,7 +57,10 @@ const EditProfile = ({editModal, setEditModal}) => {
                 <label className=" pb-3 block" htmlFor="">
                     Name*
                 </label>
-                <input type="text" placeholder="username..." className=" w-full p-1 outline-none border-b border-black" maxLength={50} />
+                <input 
+                    type="text" placeholder="username..." className=" w-full p-1 outline-none border-b border-black" maxLength={50} 
+                    onChange={(e) => setForm({...form, username: e.target.value})}
+                />
                 <p className=" text-sm text-gray-600 pt-2">
                     Appears on your Profile page, as your byline, and in your responses.10/50
                 </p>
@@ -55,15 +68,18 @@ const EditProfile = ({editModal, setEditModal}) => {
                     <label className=" pb-3 block" htmlFor="">
                         Bio*
                     </label>
-                    <input type="text" placeholder="bio..." className=" w-full p-1 outline-none border-b border-black" maxLength={160} />
+                    <input 
+                        type="text" placeholder="bio..." className=" w-full p-1 outline-none border-b border-black" maxLength={160} 
+                        onChange={(e) => setForm({...form, bio: e.target.value})}
+                    />
                     <p className=" text-sm text-gray-600 pt-2">
                         Appears to your Profile and next to your stories. 42/160
                     </p>
                 </section>
             </section>
             <div className=" flex items-center justify-end gap-4 pt-[2rem]">
-                <button className={btn}>Cancel</button>
-                <button className={`${btn} bg-green-800 text-white`}>Save</button>
+                <button onClick={() => setEditModal(false)} className={btn}>Cancel</button>
+                <button onClick={saveForm} className={`${btn} bg-green-800 text-white`}>Save</button>
             </div>
         </div>
     </Modal>
