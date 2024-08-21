@@ -7,9 +7,14 @@ import { LiaTimesSolid } from "react-icons/lia"
 import { discoverActions } from "../../../data"
 import { IoSettingsSharp } from "react-icons/io5"
 import EditProfile from "./Activities/EditProfile"
+import { Blog } from "../../../context/Context"
+import { useParams } from "react-router-dom"
 
 
 const Profile = () => {
+    const { allUsers } = Blog()
+    const { userId } = useParams()
+
     const activities = [
         {
             title: "Home",
