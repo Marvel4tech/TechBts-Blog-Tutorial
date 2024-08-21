@@ -1,9 +1,9 @@
 import { LiaTimesSolid } from "react-icons/lia"
 import Modal from "../../../../utilities/Modal"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 
-const EditProfile = ({editModal, setEditModal}) => {
+const EditProfile = ({editModal, setEditModal, getUserData}) => {
     const imgRef = useRef(null)
     const [imageUrl, setImageUrl] = useState("")
     const [form, setForm] = useState({username:"", userImg:"", bio:""})
@@ -11,6 +11,14 @@ const EditProfile = ({editModal, setEditModal}) => {
     const openFile = () => {
         imgRef.current.click()
     }
+
+    useEffect(() => {
+        if (getUserData){
+            setForm(getUserData)
+        } else{
+            setForm({username: '', userImg: '', bio: ''})
+        }
+    }, [getUserData])
 
     const saveForm = () => {
         console.log(form)
@@ -60,6 +68,7 @@ const EditProfile = ({editModal, setEditModal}) => {
                 <input 
                     type="text" placeholder="username..." className=" w-full p-1 outline-none border-b border-black" maxLength={50} 
                     onChange={(e) => setForm({...form, username: e.target.value})}
+                    value={form.username}
                 />
                 <p className=" text-sm text-gray-600 pt-2">
                     Appears on your Profile page, as your byline, and in your responses.10/50
@@ -71,6 +80,7 @@ const EditProfile = ({editModal, setEditModal}) => {
                     <input 
                         type="text" placeholder="bio..." className=" w-full p-1 outline-none border-b border-black" maxLength={160} 
                         onChange={(e) => setForm({...form, bio: e.target.value})}
+                        value={form.bio}
                     />
                     <p className=" text-sm text-gray-600 pt-2">
                         Appears to your Profile and next to your stories. 42/160

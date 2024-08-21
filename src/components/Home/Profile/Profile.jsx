@@ -80,7 +80,7 @@ const Profile = () => {
             </div>
         </Modal>
         {editModal && (
-            <EditProfile editModal={editModal} setEditModal={setEditModal} />
+            <EditProfile getUserData={getUserData} editModal={editModal} setEditModal={setEditModal} />
         )}
     </section>
   )
