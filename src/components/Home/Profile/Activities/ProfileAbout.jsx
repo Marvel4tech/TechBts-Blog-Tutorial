@@ -1,8 +1,12 @@
 import React from 'react'
 
-const ProfileAbout = () => {
+const ProfileAbout = ({ getUserData }) => {
   return (
-    <div>ProfileAbout</div>
+    <div className=' w-full'>
+        <p className=' text-2xl first-letter:uppercase'>
+            {getUserData?.bio || getUserData?.username + " has no bio"}
+        </p>
+    </div>
   )
 }
 
