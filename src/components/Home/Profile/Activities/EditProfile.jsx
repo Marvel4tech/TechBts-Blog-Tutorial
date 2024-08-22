@@ -72,7 +72,7 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
                 <div className=" flex gap-[2rem]">
                     <div className=" w-[5rem]">
                         <img className=" min-h-[5rem] min-w-[5rem] object-cover border border-gray-400 rounded-full" 
-                          src={imageUrl ? imageUrl : "/profile.png"} alt="profile-pix" 
+                          src={imageUrl ? imageUrl : form.userImg ? form.userImg : "/profile.png"} alt="profile-pix" 
                         />
                         <input 
                             onChange={(e) => {setImageUrl(URL.createObjectURL(e.target.files[0])); 
@@ -103,7 +103,7 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
                     value={form.username}
                 />
                 <p className=" text-sm text-gray-600 pt-2">
-                    Appears on your Profile page, as your byline, and in your responses.10/50
+                    {form.username.length}/50
                 </p>
                 <section className=" pt-[1rem]">
                     <label className=" pb-3 block" htmlFor="">
@@ -115,13 +115,17 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
                         value={form.bio}
                     />
                     <p className=" text-sm text-gray-600 pt-2">
-                        Appears to your Profile and next to your stories. 42/160
+                        {form.bio.length}/160
                     </p>
                 </section>
             </section>
             <div className=" flex items-center justify-end gap-4 pt-[2rem]">
-                <button onClick={() => setEditModal(false)} className={btn}>Cancel</button>
-                <button onClick={saveForm} className={`${btn} bg-green-800 text-white`}>Save</button>
+                <button onClick={() => setEditModal(false)} className={btn}>
+                    Cancel
+                </button>
+                <button onClick={saveForm} className={`${btn} bg-green-800 text-white ${loading ? "opacity-50" : ""}`}>
+                    Save
+                </button>
             </div>
         </div>
     </Modal>

@@ -67,7 +67,7 @@ const Profile = () => {
                     </button>
                 </div>
                 <div className=" sticky top-7 flex flex-col justify-between">
-                    <img className=" w-[3.5rem] h-[3.5rem] rounded-full object-cover" src="/profile.png" alt="profile-pix" />
+                    <img className=" w-[3.5rem] h-[3.5rem] rounded-full object-cover" src={getUserData?.userImg || "/profile.png"} alt="profile-pix" />
                     <h2 className=" py-2 font-bold capitalize">Marvel Ayo</h2>
                     <p className=" first-letter:uppercase text-sm text-gray-500">I am web developer and Software Enginneer.</p>
                     <button onClick={() => setEditModal(true)} className=" text-green-700 w-fit pt-6 text-sm">Edit Profile</button>
