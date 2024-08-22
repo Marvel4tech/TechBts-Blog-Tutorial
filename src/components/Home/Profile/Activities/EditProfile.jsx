@@ -1,6 +1,7 @@
 import { LiaTimesSolid } from "react-icons/lia"
 import Modal from "../../../../utilities/Modal"
 import { useEffect, useRef, useState } from "react"
+import { toast } from "react-toastify"
 
 
 const EditProfile = ({editModal, setEditModal, getUserData}) => {
@@ -21,7 +22,10 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
     }, [getUserData])
 
     const saveForm = () => {
-        console.log(form)
+        if (form["username"] === "" || form["bio"] === "") {
+            toast.error("All fields are required!!!");
+            return
+        }
     }
 
     const btn = " border border-green-600 py-2 px-5 rounded-full text-green-600"
