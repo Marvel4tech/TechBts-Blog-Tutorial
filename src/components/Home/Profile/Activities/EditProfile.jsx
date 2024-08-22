@@ -11,6 +11,7 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
     const imgRef = useRef(null)
     const [imageUrl, setImageUrl] = useState("")
     const [form, setForm] = useState({username:"", userImg:"", bio:""})
+    const [loading, setLoading] = useState(false)
 
     const openFile = () => {
         imgRef.current.click()
@@ -30,6 +31,8 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
             return
         }
 
+        setLoading(true)
+
         const storageRef = ref(storage, `image/${form.userImg.name}`)
         await uploadBytes(storageRef, form?.userImg)
 
@@ -40,9 +43,13 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
             await updateDoc(docRef, {
                 bio: form.bio,
                 username: form.username,
-                userImg: imageUrl,
+                userImg: imageUrl ? imageUrl : form.userImg,
                 userId: getUserData?.userId,
             })
+            setLoading(false)
+            setEditModal(false)
+            toast.success("Profile has been updated")
+
         } catch (error) {
             toast.error(error.message)
         }
