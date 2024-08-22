@@ -2,6 +2,8 @@ import { LiaTimesSolid } from "react-icons/lia"
 import Modal from "../../../../utilities/Modal"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { storage } from "../../../../firebaseConfig/firebase"
 
 
 const EditProfile = ({editModal, setEditModal, getUserData}) => {
@@ -21,11 +23,17 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
         }
     }, [getUserData])
 
-    const saveForm = () => {
+    const saveForm = async () => {
         if (form["username"] === "" || form["bio"] === "") {
             toast.error("All fields are required!!!");
             return
         }
+
+        const storageRef = ref(storage, `image/${form.userImg.name}`)
+        await uploadBytes(storageRef, form?.userImg)
+
+        const imageUrl = await getDownloadURL(storageRef)
+
     }
 
     const btn = " border border-green-600 py-2 px-5 rounded-full text-green-600"
