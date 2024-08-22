@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 
 const Preview = () => {
+    const imageRef = useRef(null)
+    const handleClick = () => {
+        imageRef.current.click()
+    }
+    const [imageUrl, setImageUrl] = useState("")
+
   return (
    <section className=' absolute inset-0 bg-white z-30'>
         <div className=' size my-2rem'>
@@ -12,9 +18,10 @@ const Preview = () => {
                 <div className=' flex-[1]'>
                     <h3>Story Preview</h3>
                     <div className=' w-full h-[200px] object-cover bg-gray-200 my-3 grid place-items-center cursor-pointer bg-cover 
-                    bg-no-repeat'>
+                    bg-no-repeat' onClick={handleClick} style={{backgroundImage : `url(${imageUrl})`}}>
                         Add Image
                     </div>
+                    <input onChange={(e) => setImageUrl(URL.createObjectURL(e.target.files[0]))} ref={imageRef} type="file" hidden />
                 </div>
             </div>
         </div>
