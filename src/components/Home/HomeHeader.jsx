@@ -3,16 +3,19 @@ import { CiSearch } from "react-icons/ci"
 import { LiaEditSolid } from "react-icons/lia"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { MdKeyboardArrowDown } from "react-icons/md"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import Modal from "../../utilities/Modal"
 import { useState } from "react"
 import UserModal from "./UserModal"
 import { Blog } from "../../context/Context"
 import Loading from "../Loading/Loading"
 
+
 const HomeHeader = () => {
   const { allUsers, userLoading, currentUser } = Blog()
   const [modal, setModal] = useState(false)
+
+  const { pathname } = useLocation()
 
   const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
 
@@ -26,10 +29,14 @@ const HomeHeader = () => {
             </Link>
           </div>
           <div className=" flex items-center gap-3 sm:gap-7">
-            <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
-                <span className=" text-3xl"><LiaEditSolid /></span>
-                <span className=" mt-2 text-sm">Write</span>
-            </Link>
+            {
+              pathname === "/write" ? <button>Publish</button> : (
+                <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
+                  <span className=" text-3xl"><LiaEditSolid /></span>
+                  <span className=" mt-2 text-sm">Write</span>
+                </Link>
+              )
+            }
             <span className=" text-3xl text-gray-500 cursor-pointer">
                 <IoMdNotificationsOutline />
             </span>
