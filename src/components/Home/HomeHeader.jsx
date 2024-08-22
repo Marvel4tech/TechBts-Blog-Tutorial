@@ -30,7 +30,7 @@ const HomeHeader = () => {
           </div>
           <div className=" flex items-center gap-3 sm:gap-7">
             {
-              pathname === "/write" ? <button>Publish</button> : (
+              pathname === "/write" ? <button className=" btn !text-white !bg-green-700 py-1 !rounded-full">Publish</button> : (
                 <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
                   <span className=" text-3xl"><LiaEditSolid /></span>
                   <span className=" mt-2 text-sm">Write</span>
