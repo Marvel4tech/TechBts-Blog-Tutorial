@@ -3,7 +3,8 @@ import Modal from "../../../../utilities/Modal"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-toastify"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
-import { storage } from "../../../../firebaseConfig/firebase"
+import { db, storage } from "../../../../firebaseConfig/firebase"
+import { doc, updateDoc } from "@firebase/firestore"
 
 
 const EditProfile = ({editModal, setEditModal, getUserData}) => {
@@ -33,6 +34,18 @@ const EditProfile = ({editModal, setEditModal, getUserData}) => {
         await uploadBytes(storageRef, form?.userImg)
 
         const imageUrl = await getDownloadURL(storageRef)
+
+        try {
+            const docRef = doc(db, "users", getUserData?.userId)
+            await updateDoc(docRef, {
+                bio: form.bio,
+                username: form.username,
+                userImg: imageUrl,
+                userId: getUserData?.userId,
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
 
     }
 
