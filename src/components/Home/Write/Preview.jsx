@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
 import TagsInput from 'react-tagsinput'
+import { toast } from 'react-toastify'
 
 const Preview = ({ setPublish, description, title }) => {
     const imageRef = useRef(null)
@@ -23,6 +24,16 @@ const Preview = ({ setPublish, description, title }) => {
             setDesc("")
         }
     }, [title, description])
+
+    const handleSubmit = () => {
+        try {
+            if (preview.title === "" || desc === "")
+            toast.error("All fields are required!!")
+            return;
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
   return (
    <section className=' absolute inset-0 bg-white z-30'>
@@ -70,7 +81,7 @@ const Preview = ({ setPublish, description, title }) => {
                         Add or change topics up to 5 so readers will know what your story is about
                     </p>
                     <TagsInput value={tags} onChange={setTags} />
-                    <button className=' btn !bg-green-700 text-white !w-fit !rounded-full'>Publish Now</button>
+                    <button onClick={handleSubmit} className=' btn !bg-green-700 text-white !w-fit !rounded-full'>Publish Now</button>
             </div>
             </div>
         </div>
