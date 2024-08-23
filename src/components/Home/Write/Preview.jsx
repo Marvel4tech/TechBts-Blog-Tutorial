@@ -1,3 +1,4 @@
+import { collection } from '@firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
@@ -27,10 +28,17 @@ const Preview = ({ setPublish, description, title }) => {
 
     const handleSubmit = () => {
         try {
-            if (preview.title === "" || desc === "")
-            toast.error("All fields are required!!")
-            return;
-        } catch (error) {
+            if (preview.title === "" || desc === "" || tags.length === 0){
+                toast.error("All fields are required!!")
+                return;
+            }
+            if (preview.title.length < 15){
+                toast.error("Title must be at least 15 letters")
+            }
+
+            const collections = collection(db, "posts")
+        } 
+        catch (error) {
             toast.error(error.message)
         }
     }
