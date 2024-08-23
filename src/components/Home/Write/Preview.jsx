@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
 import TagsInput from 'react-tagsinput'
+import { Blog } from '../../../context/Context'
 
 const Preview = () => {
     const imageRef = useRef(null)
@@ -11,11 +12,13 @@ const Preview = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [tags, setTags] = useState([])
 
+    const { publish, setPublish } = Blog()
+
   return (
    <section className=' absolute inset-0 bg-white z-30'>
         <div className=' size my-2rem'>
             <span className=' absolute right-[1rem] md:right-[5rem] top-[3rem] text-2xl cursor-pointer'>
-                <LiaTimesSolid />
+                <LiaTimesSolid onClick={() => setPublish(false)} />
             </span>
             <div className=' mt-[8rem] flex flex-col md:flex-row gap-10'>
                 <div className=' flex-[1]'>
