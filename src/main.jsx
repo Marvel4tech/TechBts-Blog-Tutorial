@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import Context from './context/Context.jsx'
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-quill/dist/quill.bubble.css';
+import 'react-tagsinput/react-tagsinput.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
