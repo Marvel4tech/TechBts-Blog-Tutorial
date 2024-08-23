@@ -9,7 +9,7 @@ const useFetch = (collectionName) => {
 
     useEffect(() => {
         const getUsers = () => {
-             const postRef = query(collection(db, "collectionName"))
+             const postRef = query(collection(db, collectionName))
              onSnapshot(postRef, (snapshot) => {
                  setData(
                      snapshot.docs.map((doc) => ({
@@ -22,7 +22,7 @@ const useFetch = (collectionName) => {
         }
         getUsers()
      }, [])
-     
+
   return (
     {data, loading}
   )
