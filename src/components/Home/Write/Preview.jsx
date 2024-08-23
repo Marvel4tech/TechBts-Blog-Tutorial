@@ -5,7 +5,7 @@ import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
 import TagsInput from 'react-tagsinput'
 import { toast } from 'react-toastify'
-import { storage } from '../../../firebaseConfig/firebase'
+import { db, storage } from '../../../firebaseConfig/firebase'
 import { Blog } from '../../../context/Context'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,6 +23,8 @@ const Preview = ({ setPublish, description, title }) => {
     const [preview, setPreview] = useState({title:"", photo:""})
 
     const navigate = useNavigate()
+
+    const [loading, setLoading] = useState(false)
     
     useEffect(() => {
         if(title || description){
@@ -35,6 +37,7 @@ const Preview = ({ setPublish, description, title }) => {
     }, [title, description])
 
     const handleSubmit = async () => {
+        setLoading(true)
         try {
             if (preview.title === "" || desc === "" || tags.length === 0){
                 toast.error("All fields are required!!")
@@ -66,10 +69,11 @@ const Preview = ({ setPublish, description, title }) => {
                 title: "",
                 photo: ""
             })
-            setDesc('')
         } 
         catch (error) {
             toast.error(error.message)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -119,7 +123,9 @@ const Preview = ({ setPublish, description, title }) => {
                         Add or change topics up to 5 so readers will know what your story is about
                     </p>
                     <TagsInput value={tags} onChange={setTags} />
-                    <button onClick={handleSubmit} className=' btn !bg-green-700 text-white !w-fit !rounded-full'>Publish Now</button>
+                    <button onClick={handleSubmit} className=' btn !bg-green-700 text-white !w-fit !rounded-full'>
+                        {loading ? "Submitting" : "Publish Now"}
+                    </button>
             </div>
             </div>
         </div>
