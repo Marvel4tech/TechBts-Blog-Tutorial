@@ -1,50 +1,12 @@
 import React from 'react'
+import useFetch from '../../hook/useFetch'
 
 const Posts = () => {
+  const [data, loading] = useFetch()
   return (
-    <>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-        <h1>Posts</h1>
-    </>
-   
+    <section>
+        <p></p>
+    </section>
   )
 }
 
