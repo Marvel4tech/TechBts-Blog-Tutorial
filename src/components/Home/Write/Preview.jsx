@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
 import TagsInput from 'react-tagsinput'
-import { Blog } from '../../../context/Context'
 
-const Preview = () => {
+const Preview = ({ setPublish, description, title }) => {
     const imageRef = useRef(null)
     const handleClick = () => {
         imageRef.current.click()
@@ -12,7 +11,18 @@ const Preview = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [tags, setTags] = useState([])
 
-    const { publish, setPublish } = Blog()
+    const [desc, setDesc] = useState("")
+    const [preview, setPreview] = useState({title:"", photo:""})
+    
+    useEffect(() => {
+        if(title || description){
+            setPreview({...preview, title: title})
+            setDesc(description)
+        } else {
+            setPreview({...preview, title: ""})
+            setDesc("")
+        }
+    }, [title, description])
 
   return (
    <section className=' absolute inset-0 bg-white z-30'>
@@ -27,9 +37,26 @@ const Preview = () => {
                     bg-no-repeat' onClick={handleClick} style={{backgroundImage : `url(${imageUrl})`}}>
                         {!imageUrl && `Add Image`}
                     </div>
-                    <input onChange={(e) => setImageUrl(URL.createObjectURL(e.target.files[0]))} ref={imageRef} type="file" hidden />
-                    <input type="text" placeholder='Title' className=' outline-none w-full border-b border-gray-300 py-2' />
-                    <ReactQuill theme='bubble' placeholder='Tell your story...' className=' py-3 border-b border-gray-300' />
+                    <input 
+                        onChange={(e) => {setImageUrl(URL.createObjectURL(e.target.files[0])); setPreview({...preview, photo: e.target.files[0]})}} 
+                        ref={imageRef} 
+                        type="file" 
+                        hidden 
+                    />
+                    <input 
+                        type="text" 
+                        placeholder='Title' 
+                        className=' outline-none w-full border-b border-gray-300 py-2'
+                        value={preview.title}
+                        onChange={(e) => setPreview({...preview, title: e.target.value})}
+                    />
+                    <ReactQuill 
+                        theme='bubble' 
+                        placeholder='Tell your story...' 
+                        className=' py-3 border-b border-gray-300' 
+                        value={desc}
+                        onChange={setDesc}
+                    />
                     <p className=' text-gray-500 pt-4 text-sm'>
                         <span className=' font-bold'>Note:</span> Changes here will affect how your story appears in public places like
                         TechBTS's homepage and in subscribers' inboxes - not the contents of the story itself
