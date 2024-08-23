@@ -1,11 +1,17 @@
-import { collection } from '@firebase/firestore'
+import { addDoc, collection } from '@firebase/firestore'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import React, { useEffect, useRef, useState } from 'react'
 import { LiaTimesSolid } from 'react-icons/lia'
 import ReactQuill from 'react-quill'
 import TagsInput from 'react-tagsinput'
 import { toast } from 'react-toastify'
+import { storage } from '../../../firebaseConfig/firebase'
+import { Blog } from '../../../context/Context'
+import { useNavigate } from 'react-router-dom'
 
 const Preview = ({ setPublish, description, title }) => {
+    const { currentUser } = Blog()
+
     const imageRef = useRef(null)
     const handleClick = () => {
         imageRef.current.click()
@@ -15,6 +21,8 @@ const Preview = ({ setPublish, description, title }) => {
 
     const [desc, setDesc] = useState("")
     const [preview, setPreview] = useState({title:"", photo:""})
+
+    const navigate = useNavigate()
     
     useEffect(() => {
         if(title || description){
@@ -26,7 +34,7 @@ const Preview = ({ setPublish, description, title }) => {
         }
     }, [title, description])
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         try {
             if (preview.title === "" || desc === "" || tags.length === 0){
                 toast.error("All fields are required!!")
@@ -37,6 +45,28 @@ const Preview = ({ setPublish, description, title }) => {
             }
 
             const collections = collection(db, "posts")
+            const storageRef = ref(storage, `image/${preview.photo.name}`);
+            await uploadBytes(storageRef, preview?.photo.name)
+
+            const imageUrl = await getDownloadURL(storageRef)
+
+            await addDoc(collections, {
+                userId: currentUser?.uid,
+                title : preview.title,
+                desc,
+                tags,
+                postImg: imageUrl,
+                created: Date.now(),
+                pageViews: 0,
+            })
+            toast.success("Post added Successfully")
+            navigate("/")
+            setPublish(false)
+            setPreview({
+                title: "",
+                photo: ""
+            })
+            setDesc('')
         } 
         catch (error) {
             toast.error(error.message)
