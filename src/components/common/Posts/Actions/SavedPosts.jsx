@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { CiSaveDown2 } from 'react-icons/ci'
 import { Blog } from '../../../../context/Context'
-import { doc } from '@firebase/firestore'
+import { deleteDoc, doc, setDoc } from '@firebase/firestore'
+import { toast } from 'react-toastify'
+import { db } from '../../../../firebaseConfig/firebase'
 
 const SavedPosts = ({ post }) => {
     const [isSaved, setIsSaved] = useState(false)
@@ -11,6 +13,16 @@ const SavedPosts = ({ post }) => {
         try {
             if(currentUser) {
                 const saveRef = doc(db, "users", currentUser?.uid, "savePost", post?.id)
+
+                if(isSaved){
+                    await deleteDoc(saveRef);
+                    toast.success("Post has been unsaved")
+                } else {
+                    await setDoc(saveRef, {
+                        ...post,
+                    })
+                    toast.success("Post has been Save")
+                }
             }
         } catch (error) {
             
