@@ -2,7 +2,7 @@ import React from 'react'
 import useFetch from '../../hook/useFetch';
 
 const PostCard = ({ post }) => {
-    const { title, decs, created, postImg, id: postId, userId } = post;
+    const { title, desc, created, postImg, id: postId, userId } = post;
     const { data, loading } = useFetch("users");
     const getUserData = data && data?.find((user) => user?.id === userId)
 
@@ -15,6 +15,9 @@ const PostCard = ({ post }) => {
             <h2 className=' text-xl font-bold line-clamp-2 leading-6 capitalize'>
                 {title}
             </h2>
+            <div className=' py-1 text-gray-500 line-clamp-2 leading-5'
+             dangerouslySetInnerHTML={{__html: desc}}
+            />
         </div>
     </section>
   )
