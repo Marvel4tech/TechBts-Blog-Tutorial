@@ -22,10 +22,8 @@ const PostCard = ({ post }) => {
                     dangerouslySetInnerHTML={{__html: desc}}
                 />
             </div>
-            <div>
-                <div className=' flex-[1]'>
-                    <img src={postImg} alt="postImg" className=' w-[18rem]'/>
-                </div>
+            <div className=' flex-[1]'>
+                <img src={postImg} alt="postImg" className=' w-[53rem] h-[12rem] sm:h-[8rem] object-cover'/>
             </div>
        </div>
        <div className=' flex items-center justify-between w-full md:w-[70%] mt-[2rem] md:mt-0'>
