@@ -2,6 +2,7 @@ import React from 'react'
 import useFetch from '../../hook/useFetch';
 import { readTime } from '../../../utilities/helper';
 import moment from 'moment';
+import SavedPosts from './Actions/SavedPosts';
 
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
@@ -30,6 +31,9 @@ const PostCard = ({ post }) => {
             <p className=' text-xs text-gray-600'>
                 {readTime({__html: desc})} min read. {moment(created).format("MM DD")}
             </p>
+            <div className=' flex items-center gap-3'>
+                <SavedPosts post={post} />
+            </div>
        </div>
     </>
   )
