@@ -32,7 +32,7 @@ const PostCard = ({ post }) => {
                 {readTime({__html: desc})} min read. {moment(created).format("MM DD")}
             </p>
             <div className=' flex items-center gap-3'>
-                <SavedPosts post={post} />
+                <SavedPosts post={post} getUserData={getUserData} />
             </div>
        </div>
     </>

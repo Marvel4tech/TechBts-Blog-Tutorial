@@ -20,7 +20,7 @@ const useSingleFetch = (collectionName, id, subCol) => {
              })
         }
         getSingleData()
-     }, [])
+     }, [db, id])
 
   return (
     {data, loading}
