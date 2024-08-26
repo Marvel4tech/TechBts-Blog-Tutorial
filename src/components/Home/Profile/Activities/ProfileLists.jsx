@@ -19,15 +19,19 @@ const ProfileLists = ({ getUserData }) => {
               )}
               {loading ? <Loading /> : (data?.map((post, i) => <PostCard post={post} key={i} />))}
            </div>
-         ) : <PrivateLists /> }
+         ) : <PrivateLists username={getUserData?.username} /> }
       </div>
   )
 }
 
 export default ProfileLists
 
-const PrivateLists = () => {
+const PrivateLists = ({ username }) => {
   return (
-    <h1>Priavte List</h1>
+    <div className=' flex flex-col justify-center items-center text-center gap-[3rem]'>
+        <p>
+            <span className=' capitalize'>{username} saved posts are private</span>
+        </p>
+    </div>
   )
 }
