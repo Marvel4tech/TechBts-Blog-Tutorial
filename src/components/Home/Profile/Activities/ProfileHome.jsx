@@ -1,45 +1,9 @@
 import React from 'react'
+import useFetch from '../../../hook/useFetch'
 
-const ProfileHome = () => {
+const ProfileHome = ({ getUserData }) => {
   return (
-    <div>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-    </div>
+    const [data, loading] = useFetch()
   )
 }
 
