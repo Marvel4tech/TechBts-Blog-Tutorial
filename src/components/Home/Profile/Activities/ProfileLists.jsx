@@ -1,6 +1,8 @@
 import React from 'react'
 import useSingleFetch from '../../../hook/useSingleFetch'
 import { Blog } from '../../../../context/Context'
+import Loading from '../../../Loading/Loading'
+import PostCard from '../../../common/Posts/PostCard'
 
 const ProfileLists = ({ getUserData }) => {
   const { currentUser } = Blog()
@@ -12,9 +14,10 @@ const ProfileLists = ({ getUserData }) => {
            <div className=' flex flex-col gap-[2rem] mb-[2rem]'>
               {data.length === 0 && (
                 <p className=' text-gray-500'>
-                  {getUserData?.username} has no saved post
+                  <span className=' capitalize mr-1'>{getUserData?.username}</span> has no saved post
                 </p>
               )}
+              {loading ? <Loading /> : (data?.map((post, i) => <PostCard post={post} key={i} />))}
            </div>
          ) : <PrivateLists /> }
       </div>
