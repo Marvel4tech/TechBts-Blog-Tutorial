@@ -10,7 +10,7 @@ const Actions = () => {
         <button>
             <BsThreeDots className=' text-2xl' />
         </button>
-        <DropDown>
+        <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
             <Button onclick="" title="Edit Story" />
             <Button onclick="" title="Delete Story" />
         </DropDown>
