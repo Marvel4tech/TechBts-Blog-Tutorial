@@ -5,9 +5,13 @@ import DropDown from '../../../../utilities/DropDown'
 const Actions = () => {
     const [showDrop, setShowDrop] = useState(false)
 
+    const handleClick = () => {
+        setShowDrop(!showDrop)
+    }
+
   return (
     <div className=' relative'>
-        <button>
+        <button onClick={handleClick}>
             <BsThreeDots className=' text-2xl' />
         </button>
         <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
