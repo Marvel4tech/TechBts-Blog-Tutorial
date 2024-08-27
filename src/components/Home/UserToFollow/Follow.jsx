@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useFetch from "../../hook/useFetch"
 import { Blog } from "../../../context/Context"
+import FollowBtn from "./FollowBtn"
 
 
 const Follow = () => {
@@ -27,6 +28,7 @@ const Follow = () => {
                       {user.bio || "This user has no bio"}
                     </span>
                 </div>
+                <FollowBtn />
             </div>
           )
         })}
