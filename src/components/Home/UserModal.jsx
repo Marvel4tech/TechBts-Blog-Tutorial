@@ -4,11 +4,15 @@ import { BiSpreadsheet } from "react-icons/bi"
 import { HiOutlineChartBar } from "react-icons/hi"
 import { LiaEditSolid } from "react-icons/lia"
 import { Blog } from "../../context/Context"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { secretEmail } from "../../utilities/helper"
+import { signOut } from "firebase/auth"
+import { auth } from "../../firebaseConfig/firebase"
+import { toast } from "react-toastify"
 
 const UserModal = (setModal) => {
     const { currentUser } = Blog()
+    const navigate = useNavigate(null)
 
     const userModal = [
         {
@@ -33,6 +37,17 @@ const UserModal = (setModal) => {
         },
     ]
 
+    const signOutHandle = async () => {
+        try {
+            await signOut(auth)
+            navigate("/demo")
+            toast.success("Sign out successfully")
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+
   return (
     <section className=" absolute bg-white w-[18rem] p-6 right-0 top-[100%] shadow-2xl rounded-md z-50 text-gray-500 border">
         <Link className=" flex md:hidden items center gap-1 text-gray-500" to={'/write'}>
@@ -47,7 +62,7 @@ const UserModal = (setModal) => {
                 </Link>
             ))}
         </div>
-        <button className=" flex flex-col pt-5 cursor-pointer hover:text-black/70">
+        <button onClick={signOutHandle} className=" flex flex-col pt-5 cursor-pointer hover:text-black/70">
             Sign Out
             <span className=" text-sm">{secretEmail(currentUser?.email)}</span>
         </button>
