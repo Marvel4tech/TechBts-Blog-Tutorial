@@ -3,16 +3,20 @@ import useFetch from '../../hook/useFetch';
 import { readTime } from '../../../utilities/helper';
 import moment from 'moment';
 import SavedPosts from './Actions/SavedPosts';
+import { Blog } from '../../../context/Context';
+import Loading from '../../Loading/Loading';
 
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
-    const { data } = useFetch("users");
+    const { currentUser } = Blog()
+    const { data, loading } = useFetch("users");
     const getUserData = data && data?.find((user) => user?.id === userId)
 
   return (
     <>
-       <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer bg-yellow-700'>
-            <div className=' bg-green-400 w-full md:w-[70%] '>
+       <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer'>
+            {loading && <Loading />}
+            <div className=' w-full md:w-[70%] '>
                 <p className=' pb-2 font-semibold capitalize w-full'>
                     {getUserData.username}
                 </p>
@@ -23,7 +27,7 @@ const PostCard = ({ post }) => {
                     dangerouslySetInnerHTML={{__html: desc}}
                 />
             </div>
-            <div className='  bg-red-600 w-full md:w-[30%]'>
+            <div className='w-full md:w-[30%]'>
                 <img src={postImg} alt="postImg" className=" h-[8rem] w-full object-cover " />
             </div>
        </div>
