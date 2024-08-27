@@ -6,14 +6,14 @@ import SavedPosts from './Actions/SavedPosts';
 
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
-    const { data, loading } = useFetch("users");
+    const { data } = useFetch("users");
     const getUserData = data && data?.find((user) => user?.id === userId)
 
   return (
     <>
-       <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer'>
-            <div className=' flex-[2.5]'>
-                <p className=' pb-2 font-semibold capitalize'>
+       <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer bg-yellow-700'>
+            <div className=' bg-green-400 w-full md:w-[70%] '>
+                <p className=' pb-2 font-semibold capitalize w-full'>
                     {getUserData.username}
                 </p>
                 <h2 className=' text-xl font-bold line-clamp-2 leading-6 capitalize'>
@@ -23,8 +23,8 @@ const PostCard = ({ post }) => {
                     dangerouslySetInnerHTML={{__html: desc}}
                 />
             </div>
-            <div className=' flex-[1]'>
-                <img src={postImg} alt="postImg" className=' w-[53rem] h-[12rem] sm:h-[8rem] object-cover'/>
+            <div className='  bg-red-600 w-full md:w-[30%]'>
+                <img src={postImg} alt="postImg" className=" h-[8rem] w-full object-cover " />
             </div>
        </div>
        <div className=' flex items-center justify-between w-full md:w-[70%] mt-[2rem] md:mt-0'>
