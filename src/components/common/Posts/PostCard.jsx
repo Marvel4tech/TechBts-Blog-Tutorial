@@ -14,7 +14,7 @@ const PostCard = ({ post }) => {
     const getUserData = data && data?.find((user) => user?.id === userId)
 
   return (
-    <>
+    <section>
        <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer'>
             {loading && <Loading />}
             <div className=' w-full md:w-[70%] '>
@@ -41,7 +41,7 @@ const PostCard = ({ post }) => {
                 {currentUser?.uid === userId && <Actions post={post} /> }
             </div>
        </div>
-    </>
+    </section>
   )
 }
 
