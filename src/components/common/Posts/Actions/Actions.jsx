@@ -1,17 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import DropDown from '../../../../utilities/DropDown'
 
-const Button = ({ click, title }) => {
-    return (
-        <button className={` p-2 hover:bg-gray-100 hover:text-black/80 w-full text-sm text-left 
-          ${title === "Delete Story" ? "text-red-600" : ""}`}>
-            {title}
-        </button>
-    )
-}
-
 const Actions = () => {
+    const [showDrop, setShowDrop] = useState(false)
+
   return (
     <div className=' relative'>
         <button>
@@ -26,3 +19,13 @@ const Actions = () => {
 }
 
 export default Actions
+
+
+const Button = ({ click, title }) => {
+    return (
+        <button className={` p-2 hover:bg-gray-100 hover:text-black/80 w-full text-sm text-left 
+          ${title === "Delete Story" ? "text-red-600" : ""}`}>
+            {title}
+        </button>
+    )
+}
