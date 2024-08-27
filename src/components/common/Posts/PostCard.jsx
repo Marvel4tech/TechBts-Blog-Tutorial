@@ -5,6 +5,7 @@ import moment from 'moment';
 import SavedPosts from './Actions/SavedPosts';
 import { Blog } from '../../../context/Context';
 import Loading from '../../Loading/Loading';
+import Actions from './Actions/Actions';
 
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
@@ -37,6 +38,7 @@ const PostCard = ({ post }) => {
             </p>
             <div className=' flex items-center gap-3'>
                 <SavedPosts post={post} getUserData={getUserData} />
+                {currentUser?.uid === userId && <Actions post={post} /> }
             </div>
        </div>
     </>
