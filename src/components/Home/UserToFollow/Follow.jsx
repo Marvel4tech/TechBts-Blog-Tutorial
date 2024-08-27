@@ -12,7 +12,16 @@ const Follow = () => {
 
   return (
     <div>
-
+        {data && users?.map((user, i) => {
+          const {username, bio, userImg, userId} = user;
+          return (
+            <div key={i} className=" flex items-start gap-2 my-4">
+                <div className=" flex-1 flex items-center gap-2 cursor-pointer">
+                    <img src={userImg} alt="userImg" />
+                </div>
+            </div>
+          )
+        })}
     </div>
   )
 }
