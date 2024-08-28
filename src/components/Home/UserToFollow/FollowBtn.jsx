@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { Blog } from "../../../context/Context"
 import { db } from "../../../firebaseConfig/firebase"
-import { deleteDoc, setDoc } from "@firebase/firestore"
+import { deleteDoc, doc, setDoc } from "@firebase/firestore"
 import { toast } from "react-toastify"
 import useSingleFetch from "../../hook/useSingleFetch"
 
 
-const FollowBtn = () => {
+const FollowBtn = ({ userId }) => {
     const [isFollowed, setIsFollowed] = useState(false)
     const { currentUser } = Blog()
 
@@ -18,14 +18,14 @@ const FollowBtn = () => {
 
     useEffect(() => {
         setIsFollowed(
-            data && data?.findIndex((item) => item.id === currentUser?.uid)
-        ) !== -1;
+            data && data?.findIndex((item) => item.id === userId) !== -1
+        );
     }, [data, currentUser?.id])
 
     const handleFollow = async () => {
         try {
             if (currentUser) {
-                const followRef = doc(db, "users,", currentUser?.id, "follows", userId)
+                const followRef = doc(db, "users", userId, "follows", userId)
                 if (isFollowed) {
                     await deleteDoc(followRef)
                     toast.success("User is unFollowed")
@@ -44,7 +44,7 @@ const FollowBtn = () => {
   return (
     <>
         <button onClick={handleFollow} className=' border border-black px-3 py-[0.2rem] rounded-full'>
-            Follow
+            {isFollowed ? "Followed" : "Follow"}
         </button>
     </>
   )
