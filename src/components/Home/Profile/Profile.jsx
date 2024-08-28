@@ -37,11 +37,8 @@ const Profile = () => {
     const [modal, setModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
 
-    const { data:follows } = useSingleFetch(
-        "users",
-        post?.userId,
-        "follows"
-    )
+    const { data:follows } = useSingleFetch("users", userId, "follows")
+    const { data:followers } = useSingleFetch("users", userId, "followers")
 
   return (
     <section className=" size flex gap-[4rem] relative">
@@ -50,8 +47,8 @@ const Profile = () => {
                 <h2 className=" text-3xl font-bold sm:text-5xl capitalize">
                    {getUserData?.username}
                 </h2>
-                <p className=" text-gray-500 text-xs sm:text-sm">Followers(2)</p>
-                <p className=" text-gray-500 text-xs sm:text-sm">Following(2)</p>
+                <p className=" text-gray-500 text-xs sm:text-sm">Followers({followers.length})</p>
+                <p className=" text-gray-500 text-xs sm:text-sm">Following({follows.length})</p>
             </div>
             <div className=" flex items-center gap-5 mt-[1rem] border-b border-gray-300 mb-[3rem]">
                 {activities.map((item, i) => (

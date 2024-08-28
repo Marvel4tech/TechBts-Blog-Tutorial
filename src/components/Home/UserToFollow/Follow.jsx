@@ -2,12 +2,15 @@ import { useState } from "react"
 import useFetch from "../../hook/useFetch"
 import { Blog } from "../../../context/Context"
 import FollowBtn from "./FollowBtn"
+import { useNavigate } from "react-router-dom"
 
 
 const Follow = () => {
     const { data, loading } = useFetch("users")
     const { currentUser } = Blog()
     const [count, setCount] = useState(5)
+
+    const navigate = useNavigate()
 
     const users = data && data?.slice(0, count).filter((user) => user.userId !== currentUser?.uid)
 
@@ -17,7 +20,7 @@ const Follow = () => {
           const {username, bio, userImg, userId} = user;
           return (
             <div key={i} className=" flex items-start gap-2 my-4">
-                <div className=" flex-1 flex items-center gap-2 cursor-pointer">
+                <div onClick={() => navigate("/profile" + "/" + userId)} className=" flex-1 flex items-center gap-2 cursor-pointer">
                   <img src={userImg} alt="userImg" className=" w-[3rem] h-[3rem] cursor-pointer object-cover gap-2 rounded-full" />
                   <div className=" flex flex-col gap-1">
                     <h2 className=" font-bold capitalize">
