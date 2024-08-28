@@ -13,7 +13,7 @@ import useSingleFetch from "../../hook/useSingleFetch"
 
 
 const Profile = () => {
-    const { allUsers } = Blog()
+    const { allUsers, currentUser } = Blog()
     const { userId } = useParams()
 
     const getUserData = allUsers.find((user) => user.id === userId)
@@ -59,7 +59,8 @@ const Profile = () => {
             </div>
             <currentActive.component getUserData={getUserData} setEditModal={setEditModal} />
         </div>
-        <button onClick={() => setModal(true)} className=" fixed top-[8rem] right-0 w-[2rem] h-[2rem] bg-black text-white grid place-items-center md:hidden">
+        <button onClick={() => setModal(true)} className=" fixed top-[8rem] right-0 w-[2rem] h-[2rem]
+         bg-black text-white grid place-items-center md:hidden">
             {<IoSettingsSharp />}
         </button>
         <Modal modal={modal} setModal={setModal}>
@@ -71,10 +72,19 @@ const Profile = () => {
                     </button>
                 </div>
                 <div className=" sticky top-7 flex flex-col justify-between">
-                    <img className=" w-[3.5rem] h-[3.5rem] rounded-full object-cover" src={getUserData?.userImg || "/profile.png"} alt="profile-pix" />
-                    <h2 className=" py-2 font-bold capitalize">Marvel Ayo</h2>
-                    <p className=" first-letter:uppercase text-sm text-gray-500">I am web developer and Software Enginneer.</p>
-                    <button onClick={() => setEditModal(true)} className=" text-green-700 w-fit pt-6 text-sm">Edit Profile</button>
+                    <img className=" w-[3.5rem] h-[3.5rem] rounded-full object-cover" 
+                        src={getUserData?.userImg || "/profile.png"} alt="profile-pix" 
+                    />
+                    <h2 className=" py-2 font-bold capitalize">
+                        Marvel Ayo
+                    </h2>
+                    <p className=" first-letter:uppercase text-sm text-gray-500">
+                        I am web developer and Software Enginneer.
+                    </p>
+                    {currentUser?.uid === getUserData.userId && <button onClick={() => setEditModal(true)} className=" text-green-700 
+                    w-fit pt-6 text-sm">
+                        Edit Profile
+                    </button>}
                     <div className=" flex-[1] flex items-center flex-wrap gap-3 pt-8">
                         {discoverActions.map((item, i) => (
                             <button className=" text-xs text-black1" key={i}>{item}</button>
