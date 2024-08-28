@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Blog } from "../../../context/Context"
 import { db } from "../../../firebaseConfig/firebase"
 import { deleteDoc, setDoc } from "@firebase/firestore"
@@ -15,6 +15,12 @@ const FollowBtn = () => {
         currentUser?.uid,
         "follows"
     )
+
+    useEffect(() => {
+        setIsFollowed(
+            data && data?.findIndex((item) => item.id === currentUser?.uid)
+        ) !== -1;
+    }, [data, currentUser?.id])
 
     const handleFollow = async () => {
         try {
