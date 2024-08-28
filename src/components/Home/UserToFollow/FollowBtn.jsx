@@ -48,8 +48,9 @@ const FollowBtn = ({ userId }) => {
 
   return (
     <>
-        <button onClick={handleFollow} className=' border border-black px-3 py-[0.2rem] rounded-full'>
-            {isFollowed ? "Followed" : "Follow"}
+        <button onClick={handleFollow} className={`border border-black px-3 py-[0.2rem] rounded-full 
+        ${isFollowed ? "text-gray-500 border-none" : ""}`}>
+            {isFollowed ? "Following" : "Follow"}
         </button>
     </>
   )
