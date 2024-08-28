@@ -3,11 +3,18 @@ import { Blog } from "../../../context/Context"
 import { db } from "../../../firebaseConfig/firebase"
 import { deleteDoc, setDoc } from "@firebase/firestore"
 import { toast } from "react-toastify"
+import useSingleFetch from "../../hook/useSingleFetch"
 
 
 const FollowBtn = () => {
     const [isFollowed, setIsFollowed] = useState(false)
     const { currentUser } = Blog()
+
+    const { data, loading } = useSingleFetch(
+        "users",
+        currentUser?.uid,
+        "follows"
+    )
 
     const handleFollow = async () => {
         try {
@@ -30,7 +37,7 @@ const FollowBtn = () => {
 
   return (
     <>
-        <button className=' border border-black px-3 py-[0.2rem] rounded-full'>
+        <button onClick={handleFollow} className=' border border-black px-3 py-[0.2rem] rounded-full'>
             Follow
         </button>
     </>
