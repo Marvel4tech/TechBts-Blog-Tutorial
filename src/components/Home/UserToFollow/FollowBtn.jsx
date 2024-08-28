@@ -20,18 +20,23 @@ const FollowBtn = ({ userId }) => {
         setIsFollowed(
             data && data?.findIndex((item) => item.id === userId) !== -1
         );
-    }, [data, currentUser?.id])
+    }, [data])
 
     const handleFollow = async () => {
         try {
             if (currentUser) {
-                const followRef = doc(db, "users", userId, "follows", userId)
+                const followRef = doc(db, "users", currentUser?.uid, "follows", userId);
+                const followerRef = doc(db, "users", userId, "followers", currentUser?.uid);
                 if (isFollowed) {
                     await deleteDoc(followRef)
+                    await deleteDoc(followerRef)
                     toast.success("User is unFollowed")
                 } else {
                     await setDoc(followRef, {
-                        userId : userId
+                        userId : userId,
+                    });
+                    await setDoc(followerRef, {
+                        userId : userId,
                     });
                     toast.success("User is Followed")
                 }
