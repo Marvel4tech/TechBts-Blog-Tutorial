@@ -35,6 +35,11 @@ const Follow = () => {
             </div>
           )
         })}
+        {data?.length > 5 && (
+          <button className=" text-sm text-green-900 mb-3 hover:underline">
+            Load for more users
+          </button>
+        )}
     </div>
   )
 }
