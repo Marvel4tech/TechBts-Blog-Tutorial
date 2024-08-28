@@ -9,6 +9,7 @@ import { IoSettingsSharp } from "react-icons/io5"
 import EditProfile from "./Activities/EditProfile"
 import { Blog } from "../../../context/Context"
 import { useParams } from "react-router-dom"
+import useSingleFetch from "../../hook/useSingleFetch"
 
 
 const Profile = () => {
@@ -35,6 +36,12 @@ const Profile = () => {
     const [currentActive, setCurrentActive] = useState(activities[0])
     const [modal, setModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
+
+    const { data:follows } = useSingleFetch(
+        "users",
+        post?.userId,
+        "follows"
+    )
 
   return (
     <section className=" size flex gap-[4rem] relative">
