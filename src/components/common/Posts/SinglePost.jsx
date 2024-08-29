@@ -2,6 +2,7 @@ import { doc, getDoc } from '@firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { db } from '../../../firebaseConfig/firebase'
+import { toast } from 'react-toastify'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -10,6 +11,7 @@ const SinglePost = () => {
 
     useEffect(() => {
         const fetchPost = async () => {
+            setLoading(true)
             try {
                 const postRef = doc(db, "posts", postId)
                 const getPost = await getDoc(postRef)
@@ -18,11 +20,16 @@ const SinglePost = () => {
                     const postData = getPost.data()
                     setPost({ ... postData, id: postId })
                 }
+                setLoading(false)
             } catch (error) {
-                
+                toast.error(error.message)
+                setLoading(false)
             }
         }
-    }, [])
+
+        fetchPost()
+    }, [postId])
+
   return (
     <div>SinglePost</div>
   )
