@@ -36,7 +36,7 @@ const Follow = () => {
           )
         })}
         {data?.length > 5 && (
-          <button className=" text-sm text-green-900 mb-3 hover:underline">
+          <button onClick={() => setCount((prev) => users.length < data?.length && prev + 3)} className=" text-sm text-green-900 mb-3 hover:underline">
             Load for more users
           </button>
         )}
