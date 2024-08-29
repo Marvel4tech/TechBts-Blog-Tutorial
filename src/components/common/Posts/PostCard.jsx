@@ -6,6 +6,9 @@ import SavedPosts from './Actions/SavedPosts';
 import { Blog } from '../../../context/Context';
 import Loading from '../../Loading/Loading';
 import Actions from './Actions/Actions';
+import { useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate()
 
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
