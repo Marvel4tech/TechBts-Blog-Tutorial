@@ -8,17 +8,17 @@ import Loading from '../../Loading/Loading';
 import Actions from './Actions/Actions';
 import { useNavigate } from 'react-router-dom';
 
-const navigate = useNavigate()
-
 const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
     const { currentUser } = Blog()
     const { data, loading } = useFetch("users");
     const getUserData = data && data?.find((user) => user?.id === userId)
 
+    const navigate = useNavigate()
+
   return (
     <section>
-       <div className=' flex flex-col sm:flex-row gap-4 cursor-pointer'>
+       <div onClick={() => navigate(`post/${postId}`)} className=' flex flex-col sm:flex-row gap-4 cursor-pointer'>
             {loading && <Loading />}
             <div className=' w-full md:w-[70%] '>
                 <p className=' pb-2 font-semibold capitalize w-full'>
