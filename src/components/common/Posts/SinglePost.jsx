@@ -18,7 +18,15 @@ const SinglePost = () => {
 
                 if (getPost.exists()) {
                     const postData = getPost.data()
-                    setPost({ ... postData, id: postId })
+                    if (postData?.userId) {
+                        const userRef = doc(db, "users", postData?.userId)
+                        const getUser = await getDoc(userRef)
+
+                        if(getUser.exists()) {
+                            const userData = getUser.data()
+                            setPost({ ...postData, ...userData, id: postId })
+                        }
+                    }
                 }
                 setLoading(false)
             } catch (error) {
