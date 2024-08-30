@@ -39,6 +39,7 @@ const SinglePost = () => {
         fetchPost()
     }, [postId])
 
+    const { title, desc, postImg, username, created, userImg } = post; //you could destructure it like this or you rather use (post.title, etc)
   return (
     <>
         {loading ? (
