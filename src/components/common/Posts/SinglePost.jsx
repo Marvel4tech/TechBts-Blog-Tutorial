@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import Loading from '../../Loading/Loading'
 import { Blog } from '../../../context/Context'
 import FollowBtn from '../../Home/UserToFollow/FollowBtn'
+import { readTime } from '../../../utilities/helper'
+import moment from 'moment/moment'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -60,6 +62,12 @@ const SinglePost = () => {
                         <div className=' capitalize'>
                             <span>{username}</span>
                             {currentUser?.uid !== userId && <FollowBtn userId={userId} />}
+                        </div>
+                        <div>
+                            <p className=' text-sm text-gray-500'>
+                                {readTime({__html: desc})} min read .
+                                <span className=' ml'>{moment(created).fromNow()}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
