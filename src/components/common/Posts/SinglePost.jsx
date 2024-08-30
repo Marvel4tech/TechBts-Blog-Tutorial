@@ -5,6 +5,7 @@ import { db } from '../../../firebaseConfig/firebase'
 import { toast } from 'react-toastify'
 import Loading from '../../Loading/Loading'
 import { Blog } from '../../../context/Context'
+import FollowBtn from '../../Home/UserToFollow/FollowBtn'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -41,7 +42,7 @@ const SinglePost = () => {
         fetchPost()
     }, [postId, post?.userId])
 
-    const { title, desc, postImg, username, created, userImg } = post; //you could destructure it like this or you rather use (post.title, etc)
+    const { title, desc, postImg, username, created, userImg, userId } = post; //you could destructure it like this or rather use (post.title, etc)
   return (
     <>
         {loading ? (
@@ -58,6 +59,7 @@ const SinglePost = () => {
                     <div>
                         <div className=' capitalize'>
                             <span>{username}</span>
+                            {currentUser?.uid !== userId && <FollowBtn userId={userId} />}
                         </div>
                     </div>
                 </div>

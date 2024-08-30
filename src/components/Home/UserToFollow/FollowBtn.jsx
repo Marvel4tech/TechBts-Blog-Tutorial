@@ -4,6 +4,7 @@ import { db } from "../../../firebaseConfig/firebase"
 import { deleteDoc, doc, setDoc } from "@firebase/firestore"
 import { toast } from "react-toastify"
 import useSingleFetch from "../../hook/useSingleFetch"
+import { useLocation } from "react-router-dom"
 
 
 const FollowBtn = ({ userId }) => {
@@ -45,6 +46,8 @@ const FollowBtn = ({ userId }) => {
             toast.error(error.message)
         }
     }
+
+    const { pathName } = useLocation()
 
   return (
     <>
