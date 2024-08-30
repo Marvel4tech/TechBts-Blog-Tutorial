@@ -8,6 +8,11 @@ import { Blog } from '../../../context/Context'
 import FollowBtn from '../../Home/UserToFollow/FollowBtn'
 import { readTime } from '../../../utilities/helper'
 import moment from 'moment/moment'
+import SavedPosts from './Actions/SavedPosts'
+import Actions from './Actions/Actions'
+import Like from './Actions/Like'
+import Comment from './Actions/Comment'
+import SharePost from './Actions/SharePost'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -72,6 +77,17 @@ const SinglePost = () => {
                                 <span className=' ml'>{moment(created).fromNow()}</span>
                             </p>
                         </div>
+                    </div>
+                </div>
+                <div className=' flex justify-between items-center border-t border-b border-gray-200'>
+                    <div>
+                        <Like />
+                        <Comment />
+                    </div>
+                    <div className=' flex items-center gap-5 pt-2'>
+                        <SavedPosts />
+                        <SharePost />
+                        <Actions />
                     </div>
                 </div>
             </section>
