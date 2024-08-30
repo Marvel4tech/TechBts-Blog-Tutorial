@@ -1,6 +1,6 @@
 import { doc, getDoc } from '@firebase/firestore'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { db } from '../../../firebaseConfig/firebase'
 import { toast } from 'react-toastify'
 import Loading from '../../Loading/Loading'
@@ -44,7 +44,9 @@ const SinglePost = () => {
         fetchPost()
     }, [postId, post?.userId])
 
-    const { title, desc, postImg, username, created, userImg, userId } = post; //you could destructure it like this or rather use (post.title, etc)
+    const navigate = useNavigate()
+
+    const { title, desc, postImg, username, created, userImg, userId } = post; //you could destructure it like this or rather use (post.title)
   return (
     <>
         {loading ? (
@@ -55,7 +57,8 @@ const SinglePost = () => {
                     {title}
                 </h2>
                 <div className=' flex items-center gap-2 py-[2rem]'>
-                    <img className=' w-[3rem] h-[3rem] rounded-full object-cover cursor-pointer'
+                    <img onClick={() => navigate(`/profile/${userId}`)}
+                        className=' w-[3rem] h-[3rem] rounded-full object-cover cursor-pointer'
                         src={userImg} alt="userImg" 
                     />
                     <div>
