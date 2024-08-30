@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { db } from '../../../firebaseConfig/firebase'
 import { toast } from 'react-toastify'
+import Loading from '../../Loading/Loading'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -39,7 +40,15 @@ const SinglePost = () => {
     }, [postId])
 
   return (
-    <div>SinglePost</div>
+    <>
+        {loading ? (
+            <Loading /> 
+        ) : (
+            <section className=' w-[90%] md:w-[80%] lg:w-[60%] mx-auto py-[3rem]'>
+
+            </section>
+        )}
+    </>
   )
 }
 
