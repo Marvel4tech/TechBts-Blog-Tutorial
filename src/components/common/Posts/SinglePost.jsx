@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom'
 import { db } from '../../../firebaseConfig/firebase'
 import { toast } from 'react-toastify'
 import Loading from '../../Loading/Loading'
+import { Blog } from '../../../context/Context'
 
 const SinglePost = () => {
     const { postId } = useParams()
     const [post, setPost] = useState({})
     const [loading, setLoading] = useState(false)
+    const { currentUser } = Blog()
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -37,7 +39,7 @@ const SinglePost = () => {
         }
 
         fetchPost()
-    }, [postId])
+    }, [postId, post?.userId])
 
     const { title, desc, postImg, username, created, userImg } = post; //you could destructure it like this or you rather use (post.title, etc)
   return (
@@ -46,7 +48,19 @@ const SinglePost = () => {
             <Loading /> 
         ) : (
             <section className=' w-[90%] md:w-[80%] lg:w-[60%] mx-auto py-[3rem]'>
-
+                <h2 className=' text-4xl font-extrabold capitalize'>
+                    {title}
+                </h2>
+                <div className=' flex items-center gap-2 py-[2rem]'>
+                    <img className=' w-[3rem] h-[3rem] rounded-full object-cover cursor-pointer'
+                        src={userImg} alt="userImg" 
+                    />
+                    <div>
+                        <div className=' capitalize'>
+                            <span>{username}</span>
+                        </div>
+                    </div>
+                </div>
             </section>
         )}
     </>
