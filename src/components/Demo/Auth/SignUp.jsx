@@ -36,7 +36,8 @@ const SignUp = ({ setSignReq, setModal }) => {
                     username: form.username,
                     email: form.email,
                     userImg: "",
-                    bio: ""
+                    bio: "",
+                    created: Date.now(),
                 })
                 navigate('/')
                 toast.success('User has been created')

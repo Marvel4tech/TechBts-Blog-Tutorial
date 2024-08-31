@@ -22,7 +22,7 @@ const PostCard = ({ post }) => {
             {loading && <Loading />}
             <div className=' w-full md:w-[70%] '>
                 <p className=' pb-2 font-semibold capitalize w-full'>
-                    {getUserData.username}
+                    {getUserData?.username}
                 </p>
                 <h2 className=' text-xl font-bold line-clamp-2 leading-6 capitalize'>
                     {title}
