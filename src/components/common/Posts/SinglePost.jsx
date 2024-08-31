@@ -95,7 +95,7 @@ const SinglePost = () => {
                         <div className=' mt-6' dangerouslySetInnerHTML={{ __html : desc }} />
                     </div>
                 </section>
-                <Recommended />
+                <Recommended post={post} />
             </>
         )}
     </>

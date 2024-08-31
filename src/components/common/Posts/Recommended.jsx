@@ -2,13 +2,15 @@ import { useEffect } from "react"
 import useFetch from "../../hook/useFetch"
 
 
-const Recommended = () => {
-  const {data} = useFetch("posts")
+const Recommended = ({ post }) => {
+  const { data } = useFetch("posts")
 
   let recommendedPost = [];
 
   useEffect(() => {
-    
+    data && data.forEach((post) => {
+      const postTag = post.tags;
+    })
   }, [])
 
   return (
