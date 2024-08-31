@@ -12,7 +12,7 @@ import Actions from './Actions/Actions'
 import Like from './Actions/Like'
 import Comment from './Actions/Comment'
 import SharePost from './Actions/SharePost'
-import SavedPosts from './Actions/SavedPosts'
+import Recommended from './Recommended'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -95,7 +95,7 @@ const SinglePost = () => {
                         <div className=' mt-6' dangerouslySetInnerHTML={{ __html : desc }} />
                     </div>
                 </section>
-                <Reco />
+                <Recommended />
             </>
         )}
     </>
