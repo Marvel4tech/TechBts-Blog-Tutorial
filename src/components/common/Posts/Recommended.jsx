@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import useFetch from "../../hook/useFetch"
+import { readTime } from "../../../utilities/helper"
+import moment from "moment/moment"
 
 
 const Recommended = ({ post: singlePost }) => {
@@ -35,7 +37,7 @@ const Recommended = ({ post: singlePost }) => {
             {commonTags.length < 0 ? (
               <p>No recommended posts found based on your preference</p>
             ) : (
-              <div>
+              <div className=" grid grid-cols-card gap-[2rem] my-[3rem]">
                   {commonTags.map((post) => (
                     <Post post={post} key={post.id} />
                   ))}
@@ -50,10 +52,28 @@ export default Recommended
 
 
 const Post = ({ post }) => {
-    const { title, username, postImg, desc, created, id: postId, userImg } = post;
+    const { postImg, desc, created, id: postId, userId } = post;
+    const { data } = useFetch("users")
+
+    const { username, userImg } = getUser = data && data.find((user) => user?.id === userId)
+
     return (
       <div className=" w-full cursor-pointer">
-
+          <img className=" w-full object-cover h-[200px]" src={postImg} alt="post-img" />
+          <div className=" flex items-center gap-1 py-1">
+              <img className=" w-[2rem] h-[2rem] object-cover rounded-full" src={userImg} alt="user-img" />
+              <h3 className=" text-sm capitalize">
+                  {username}
+              </h3>
+          </div>
+          <h2 className=" font-extrabold leading-5 line-clamp-2">
+              {title}
+          </h2>
+          <div className=" line-clamp-2 leading-5 text-gray-500 my-3" dangerouslySetInnerHTML={{__html: desc}} />
+          <p className=" text-sm text-gray-600">
+              {readTime({__html : desc})} min read
+              <span className=" ml-3">{ moment(created).format("MMM YY") }</span>
+          </p>
       </div>
     )
 }
