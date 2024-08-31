@@ -12,8 +12,8 @@ const SavedPosts = ({ post }) => {
     const { data, loading } = useSingleFetch("users", post?.userId, "savePost")
 
     useEffect(() => {
-        setIsSaved(data && data.find((item)  => item.id === post.id ))
-    }, [data, post?.id])
+        setIsSaved(data && data?.find((item) => item.id === post?.id))
+    }, [data, post?.id]);
 
     const handleSave = async () => {
         try {
@@ -31,7 +31,7 @@ const SavedPosts = ({ post }) => {
                 }
             }
         } catch (error) {
-            
+            toast.error(error.message);
         }
     }
 

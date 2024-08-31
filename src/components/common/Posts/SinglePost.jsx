@@ -8,11 +8,11 @@ import { Blog } from '../../../context/Context'
 import FollowBtn from '../../Home/UserToFollow/FollowBtn'
 import { readTime } from '../../../utilities/helper'
 import moment from 'moment/moment'
-import SavedPosts from './Actions/SavedPosts'
 import Actions from './Actions/Actions'
 import Like from './Actions/Like'
 import Comment from './Actions/Comment'
 import SharePost from './Actions/SharePost'
+import SavedPosts from './Actions/SavedPosts'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -79,16 +79,18 @@ const SinglePost = () => {
                         </div>
                     </div>
                 </div>
-                <div className=' flex justify-between items-center border-t border-b border-gray-200'>
-                    <div>
+                <div className=' flex justify-between items-center border-t border-b border-gray-200 py-[0.5rem]'>
+                    <div className=' flex items-center gap-5'>
                         <Like />
                         <Comment />
                     </div>
                     <div className=' flex items-center gap-5 pt-2'>
-                        <SavedPosts />
                         <SharePost />
-                        <Actions />
+                        {currentUser?.uid === post.userId && <Actions />}
                     </div>
+                </div>
+                <div className=' mt-[3rem]'>
+                    <img src={postImg} alt="post-img" className=' w-full h-[400px] object-cover' />
                 </div>
             </section>
         )}
