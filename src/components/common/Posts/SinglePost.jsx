@@ -57,42 +57,46 @@ const SinglePost = () => {
         {loading ? (
             <Loading /> 
         ) : (
-            <section className=' w-[90%] md:w-[80%] lg:w-[60%] mx-auto py-[3rem]'>
-                <h2 className=' text-4xl font-extrabold capitalize'>
-                    {title}
-                </h2>
-                <div className=' flex items-center gap-2 py-[2rem]'>
-                    <img onClick={() => navigate(`/profile/${userId}`)}
-                        className=' w-[3rem] h-[3rem] rounded-full object-cover cursor-pointer'
-                        src={userImg} alt="userImg" 
-                    />
-                    <div>
-                        <div className=' capitalize'>
-                            <span>{username}</span>
-                            {currentUser?.uid !== userId && <FollowBtn userId={userId} />}
-                        </div>
+            <>
+                <section className=' w-[90%] md:w-[80%] lg:w-[60%] mx-auto py-[3rem]'>
+                    <h2 className=' text-4xl font-extrabold capitalize'>
+                        {title}
+                    </h2>
+                    <div className=' flex items-center gap-2 py-[2rem]'>
+                        <img onClick={() => navigate(`/profile/${userId}`)}
+                            className=' w-[3rem] h-[3rem] rounded-full object-cover cursor-pointer'
+                            src={userImg} alt="userImg" 
+                        />
                         <div>
-                            <p className=' text-sm text-gray-500'>
-                                {readTime({__html: desc})} min read .
-                                <span className=' ml'>{moment(created).fromNow()}</span>
-                            </p>
+                            <div className=' capitalize'>
+                                <span>{username}</span>
+                                {currentUser?.uid !== userId && <FollowBtn userId={userId} />}
+                            </div>
+                            <div>
+                                <p className=' text-sm text-gray-500'>
+                                    {readTime({__html: desc})} min read .
+                                    <span className=' ml'>{moment(created).fromNow()}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className=' flex justify-between items-center border-t border-b border-gray-200 py-[0.5rem]'>
-                    <div className=' flex items-center gap-5'>
-                        <Like />
-                        <Comment />
+                    <div className=' flex justify-between items-center border-t border-b border-gray-200 py-[0.5rem]'>
+                        <div className=' flex items-center gap-5'>
+                            <Like />
+                            <Comment />
+                        </div>
+                        <div className=' flex items-center gap-5 pt-2'>
+                            <SharePost />
+                            {currentUser?.uid === post.userId && <Actions />}
+                        </div>
                     </div>
-                    <div className=' flex items-center gap-5 pt-2'>
-                        <SharePost />
-                        {currentUser?.uid === post.userId && <Actions />}
+                    <div className=' mt-[3rem]'>
+                        <img src={postImg} alt="post-img" className=' w-full h-[400px] object-cover' />
+                        <div className=' mt-6' dangerouslySetInnerHTML={{ __html : desc }} />
                     </div>
-                </div>
-                <div className=' mt-[3rem]'>
-                    <img src={postImg} alt="post-img" className=' w-full h-[400px] object-cover' />
-                </div>
-            </section>
+                </section>
+                <Reco />
+            </>
         )}
     </>
   )
