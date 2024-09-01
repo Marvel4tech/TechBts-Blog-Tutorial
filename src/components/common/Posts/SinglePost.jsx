@@ -13,6 +13,7 @@ import Like from './Actions/Like'
 import Comment from './Actions/Comment'
 import SharePost from './Actions/SharePost'
 import Recommended from './Recommended'
+import Comments from '../Comments/Comments'
 
 const SinglePost = () => {
     const { postId } = useParams()
@@ -82,7 +83,7 @@ const SinglePost = () => {
                     </div>
                     <div className=' flex justify-between items-center border-t border-b border-gray-200 py-[0.5rem]'>
                         <div className=' flex items-center gap-5'>
-                            <Like post={post} postId={postId} />
+                            <Like postId={postId} />
                             <Comment />
                         </div>
                         <div className=' flex items-center gap-5 pt-2'>
@@ -96,6 +97,7 @@ const SinglePost = () => {
                     </div>
                 </section>
                 {post && <Recommended post={post} />}
+                <Comments />
             </>
         )}
     </>

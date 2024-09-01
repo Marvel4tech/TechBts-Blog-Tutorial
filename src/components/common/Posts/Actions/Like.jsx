@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import useSingleFetch from '../../../hook/useSingleFetch'
 import { formatNum } from '../../../../utilities/helper'
 
-const Like = ({ post, postId }) => {
+const Like = ({ postId }) => {
   const [isLiked, setIsLiked] = useState(false)
   const { currentUser } = Blog()
 
