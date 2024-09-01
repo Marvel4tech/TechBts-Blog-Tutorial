@@ -5,7 +5,9 @@ import { Blog } from "../../../context/Context"
 
 const Comments = () => {
     const [showModal, setShowModal] = useState(true)
-    const { currentUser } = Blog()
+    const { currentUser, allUsers } = Blog()
+
+    const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
 
   return (
     <Modal setModal={setShowModal} modal={showModal}>
@@ -22,7 +24,7 @@ const Comments = () => {
             {currentUser && (
                 <div className=" shadow-2xl p-3 my-5 overflow-hidden border border-gray-300">
                     <div className=" flex items-center gap-2 mb-5">
-                        <img className=" w-[2rem] h-[2rem] rounded-full object-cover" src="/profile.png" alt="user-img" />
+                        <img className=" w-[2rem] h-[2rem] rounded-full object-cover" src={getUserData?.userImg || "/profile.png"} alt="user-img" />
                         <h3 className=" capitalize">Maii_HD</h3>
                     </div>
                     <textarea placeholder="What are your thoughts?" className=" w-full outline-none text-sm border pt-4 px-2 resize-none" />
