@@ -20,8 +20,16 @@ const Comments = () => {
                 </button>
             </div>
             {currentUser && (
-                <div className=" shadow-2xl p-3 my-5 overflow-hidden">
-                    <img src="/profile.png" alt="user-img" />
+                <div className=" shadow-2xl p-3 my-5 overflow-hidden border border-gray-300">
+                    <div className=" flex items-center gap-2 mb-5">
+                        <img className=" w-[2rem] h-[2rem] rounded-full object-cover" src="/profile.png" alt="user-img" />
+                        <h3 className=" capitalize">Maii_HD</h3>
+                    </div>
+                    <textarea placeholder="What are your thoughts?" className=" w-full outline-none text-sm border pt-4 px-2 resize-none" />
+                    <div className=" flex items-center justify-end gap-4 mt-[1rem]">
+                        <button className=" text-sm">Cancel</button>
+                        <button className=" btn !text-xs !bg-green-700 !text-white !rounded-full">Response</button>
+                    </div>
                 </div>
             )}
         </section>
