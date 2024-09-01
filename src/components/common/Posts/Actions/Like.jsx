@@ -13,7 +13,9 @@ const Like = ({ post, postId }) => {
   const { data } = useSingleFetch("posts", postId, "likes")
 
   useEffect(() => {
-    setIsLiked(data && data.findIndex((item) => item.id === currentUser?.uid)) !== -1
+    setIsLiked(
+      data && data.findIndex((item) => item.id === currentUser?.uid) !== -1
+    )
   }, [data])
 
   const handleLike = async () => {
@@ -35,8 +37,8 @@ const Like = ({ post, postId }) => {
 
   return (
     <button onClick={handleLike} className=' flex items-center gap-1 text-sm'>
-        <PiHandsClappingDuotone className=' text-xl' />
-        <span>1</span>
+        <PiHandsClappingDuotone className={` text-xl ${isLiked ? "text-black" : "text-gray-500"}`} />
+        <span>{data?.length}</span>
     </button>
   )
 }
