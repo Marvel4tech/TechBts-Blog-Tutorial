@@ -4,10 +4,13 @@ import { deleteDoc, doc, setDoc } from '@firebase/firestore'
 import { db } from '../../../../firebaseConfig/firebase'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import useSingleFetch from '../../../hook/useSingleFetch'
 
 const Like = ({ post, postId }) => {
   const [isLiked, setIsLiked] = useState(false)
   const { currentUser } = Blog()
+
+  const { data } = useSingleFetch("posts", postId, "likes")
 
   const handleLike = async () => {
     try {
@@ -27,7 +30,7 @@ const Like = ({ post, postId }) => {
   }
 
   return (
-    <button className=' flex items-center gap-1 text-sm'>
+    <button onClick={handleLike} className=' flex items-center gap-1 text-sm'>
         <PiHandsClappingDuotone className=' text-xl' />
         <span>1</span>
     </button>
