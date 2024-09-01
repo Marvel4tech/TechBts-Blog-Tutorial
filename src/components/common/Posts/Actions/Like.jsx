@@ -2,7 +2,7 @@ import { PiHandsClappingDuotone } from 'react-icons/pi'
 import { Blog } from '../../../../context/Context'
 import { deleteDoc, doc, setDoc } from '@firebase/firestore'
 import { db } from '../../../../firebaseConfig/firebase'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import useSingleFetch from '../../../hook/useSingleFetch'
 
@@ -11,6 +11,10 @@ const Like = ({ post, postId }) => {
   const { currentUser } = Blog()
 
   const { data } = useSingleFetch("posts", postId, "likes")
+
+  useEffect(() => {
+    setIsLiked(data && data.findIndex((item) => item.id === currentUser?.uid)) !== -1
+  }, [data])
 
   const handleLike = async () => {
     try {
