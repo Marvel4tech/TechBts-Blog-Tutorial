@@ -5,6 +5,7 @@ import { db } from '../../../../firebaseConfig/firebase'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import useSingleFetch from '../../../hook/useSingleFetch'
+import { formatNum } from '../../../../utilities/helper'
 
 const Like = ({ post, postId }) => {
   const [isLiked, setIsLiked] = useState(false)
@@ -38,7 +39,7 @@ const Like = ({ post, postId }) => {
   return (
     <button onClick={handleLike} className=' flex items-center gap-1 text-sm'>
         <PiHandsClappingDuotone className={` text-xl ${isLiked ? "text-black" : "text-gray-500"}`} />
-        <span>{data?.length}</span>
+        <span>{formatNum(data?.length)}</span>
     </button>
   )
 }
