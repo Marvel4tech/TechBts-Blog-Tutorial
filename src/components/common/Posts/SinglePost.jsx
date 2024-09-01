@@ -82,7 +82,7 @@ const SinglePost = () => {
                     </div>
                     <div className=' flex justify-between items-center border-t border-b border-gray-200 py-[0.5rem]'>
                         <div className=' flex items-center gap-5'>
-                            <Like />
+                            <Like post={post} postId={postId} />
                             <Comment />
                         </div>
                         <div className=' flex items-center gap-5 pt-2'>
