@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Modal from "../../../utilities/Modal"
 import { LiaTimesSolid } from 'react-icons/lia'
+import { Blog } from "../../../context/Context"
 
 const Comments = () => {
     const [showModal, setShowModal] = useState(true)
+    const { currentUser } = Blog()
 
   return (
     <Modal setModal={setShowModal} modal={showModal}>
@@ -17,6 +19,11 @@ const Comments = () => {
                     <LiaTimesSolid />
                 </button>
             </div>
+            {currentUser && (
+                <div className=" shadow-2xl p-3 my-5 overflow-hidden">
+                    <img src="/profile.png" alt="user-img" />
+                </div>
+            )}
         </section>
     </Modal>
   )
