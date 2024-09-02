@@ -16,8 +16,9 @@ const HomeHeader = () => {
   const [modal, setModal] = useState(false)
 
   const { pathname } = useLocation()
-
   const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
+
+  const editPath = pathname.split("/")[1];
 
   return (
     <header className=" border-gray-200 border-b">
@@ -30,12 +31,17 @@ const HomeHeader = () => {
           </div>
           <div className=" flex items-center gap-3 sm:gap-7">
             {
-              pathname === "/write" ? <button onClick={() => setPublish(true)} className=" btn !text-white !bg-green-700 py-1 !rounded-full">Publish</button> : (
-                <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
-                  <span className=" text-3xl"><LiaEditSolid /></span>
-                  <span className=" mt-2 text-sm">Write</span>
-                </Link>
-              )
+              pathname === "/write" ? 
+                <button onClick={() => setPublish(true)} className=" btn !text-white !bg-green-700 py-1 !rounded-full">
+                    Publish
+                </button> : editPath === "editPost" ? (
+                  <button className=" btn !text-white !bg-green-700 py-1 !rounded-full">Save and Update</button>
+                ) : (
+                    <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
+                      <span className=" text-3xl"><LiaEditSolid /></span>
+                      <span className=" mt-2 text-sm">Write</span>
+                    </Link>
+                )
             }
             <span className=" text-3xl text-gray-500 cursor-pointer">
                 <IoMdNotificationsOutline />
