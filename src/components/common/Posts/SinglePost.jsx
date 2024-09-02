@@ -88,7 +88,7 @@ const SinglePost = () => {
                         </div>
                         <div className=' flex items-center gap-5 pt-2'>
                             <SharePost />
-                            {currentUser?.uid === post.userId && <Actions />}
+                            {currentUser?.uid === post.userId && <Actions postId={postId} />}
                         </div>
                     </div>
                     <div className=' mt-[3rem]'>

@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import DropDown from '../../../../utilities/DropDown'
+import { useNavigate } from 'react-router-dom'
 
-const Actions = () => {
+const Actions = ({ postId }) => {
     const [showDrop, setShowDrop] = useState(false)
 
     const handleClick = () => {
         setShowDrop(!showDrop)
     }
+
+    const navigate = useNavigate(null)
 
   return (
     <div className=' relative'>
@@ -15,7 +18,7 @@ const Actions = () => {
             <BsThreeDots className=' text-2xl' />
         </button>
         <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
-            <Button onclick="" title="Edit Story" />
+            <Button onclick={() => navigate(`/editPost/${postId}`)} title="Edit Story" />
             <Button onclick="" title="Delete Story" />
         </DropDown>
     </div>
