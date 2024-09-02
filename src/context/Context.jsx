@@ -12,7 +12,7 @@ const Context = ({ children }) => {
     const [allUsers, setAllUsers] = useState([])
     const [userLoading, setUserLoading] = useState(true)
     const [publish, setPublish] = useState(false)
-    const [showComment, setShowComment] = useState(true);
+    const [showComment, setShowComment] = useState(false);
     const [commentLength, setCommentLength] = useState(0);
 
     useEffect(() => {

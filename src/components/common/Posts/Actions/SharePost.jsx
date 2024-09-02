@@ -3,9 +3,20 @@ import DropDown from '../../../../utilities/DropDown'
 import { CiShare1 } from 'react-icons/ci'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
 import { BiLink, BiLogoFacebookCircle, BiLogoTwitter, BiLogoLinkedinSquare } from 'react-icons/bi'
+import { toast } from 'react-toastify'
 
 const SharePost = () => {
   const [showDrop, setShowDrop] = useState(false)
+
+  const path = window.location.path
+  const copyLink = async () => {
+    try {
+        await navigator.clipboard.writeText(path)
+        toast.success("Link has been copied")
+    } catch (error) {
+        toast.error(error.message)
+    }
+  }
 
   return (
       <div className=' relative'>
