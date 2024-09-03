@@ -12,6 +12,7 @@ const PostCard = ({ post }) => {
     const { title, desc, created, postImg, id: postId, userId } = post;
     const { currentUser } = Blog()
     const { data, loading } = useFetch("users");
+    
     const getUserData = data && data?.find((user) => user?.id === userId)
 
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ const PostCard = ({ post }) => {
                 />
             </div>
             <div className='w-full md:w-[30%]'>
-                <img src={postImg} alt="postImg" className=" h-[8rem] w-full object-cover " />
+                {postImg && <img src={postImg} alt="postImg" className=" h-[8rem] w-full object-cover " />}
             </div>
        </div>
        <div className=' flex items-center justify-between w-full md:w-[70%] mt-[2rem] md:mt-0'>
@@ -41,7 +42,7 @@ const PostCard = ({ post }) => {
             </p>
             <div className=' flex items-center gap-3'>
                 <SavedPosts post={post} getUserData={getUserData} />
-                {currentUser?.uid === userId && <Actions post={post} /> }
+                {currentUser?.uid === userId && <Actions postId={postId} title={title} desc={desc} /> }
             </div>
        </div>
     </section>

@@ -74,11 +74,11 @@ const Post = ({ post }) => {
         />
       )}
       <div className="flex items-center gap-1 py-3">
-        <img
+        {postImg && <img
           className="w-[2rem] h-[2rem] object-cover rounded-full"
           src={userImg}
           alt="userImg"
-        />
+        />}
         <h3 className="text-sm capitalize">{username}</h3>
       </div>
       <h2 className="font-extrabold leading-5 line-clamp-2">{title}</h2>
