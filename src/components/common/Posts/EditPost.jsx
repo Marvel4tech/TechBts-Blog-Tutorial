@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
+import { Blog } from '../../../context/Context'
 
 const EditPost = () => {
+    const { updateData } = Blog()
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+
+    useEffect(() => {
+        if (updateData) {
+            setTitle(updateData.title)
+            setDescription(updateData.description)
+        }
+    }, [updateData])
 
   return (
     <section className=' w-[90%] md:w-[80%] lg:w-[60%] mx-auto py-[3rem]'>

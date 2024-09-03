@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 import DropDown from '../../../../utilities/DropDown'
 import { useNavigate } from 'react-router-dom'
+import { Blog } from '../../../../context/Context'
 
-const Actions = ({ postId }) => {
+const Actions = ({ postId, title, desc }) => {
+    const { setUpdateData } = Blog()
     const [showDrop, setShowDrop] = useState(false)
 
     const handleClick = () => {
@@ -12,13 +14,18 @@ const Actions = ({ postId }) => {
 
     const navigate = useNavigate(null)
 
+    const handleEdit = () => {
+        navigate(`/editPost/${postId}`)
+        setUpdateData({title, description: desc})
+    }
+
   return (
     <div className=' relative'>
         <button onClick={handleClick}>
             <BsThreeDots className=' text-2xl' />
         </button>
         <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
-            <Button click={() => navigate(`/editPost/${postId}`)} title="Edit Story" />
+            <Button click={handleEdit} title="Edit Story" />
             <Button onclick="" title="Delete Story" />
         </DropDown>
     </div>
