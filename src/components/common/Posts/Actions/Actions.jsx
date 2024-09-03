@@ -3,9 +3,12 @@ import { BsThreeDots } from 'react-icons/bs'
 import DropDown from '../../../../utilities/DropDown'
 import { useNavigate } from 'react-router-dom'
 import { Blog } from '../../../../context/Context'
+import { deleteDoc, doc } from '@firebase/firestore'
+import { db } from '../../../../firebaseConfig/firebase'
+import { toast } from 'react-toastify'
 
 const Actions = ({ postId, title, desc }) => {
-    const { setUpdateData } = Blog()
+    const { setUpdateData, currentUser } = Blog()
     const [showDrop, setShowDrop] = useState(false)
 
     const handleClick = () => {
@@ -19,6 +22,21 @@ const Actions = ({ postId, title, desc }) => {
         setUpdateData({title, description: desc})
     }
 
+    const handleRemove = async () => {
+        try {
+            const ref = doc(db, "posts", postId)
+            const likeRef = doc(db, "posts", postId, "likes", currentUser?.uid)
+            const savedPostRef = doc(db, "users", currentUser?.uid, "savedPost", postId)
+            await deleteDoc(ref)
+            await deleteDoc(likeRef)
+            await deleteDoc(savedPostRef)
+            toast.success("Post has been removed")
+            navigate("/")
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
   return (
     <div className=' relative'>
         <button onClick={handleClick}>
@@ -26,7 +44,7 @@ const Actions = ({ postId, title, desc }) => {
         </button>
         <DropDown showDrop={showDrop} setShowDrop={setShowDrop} size="w-[7rem]">
             <Button click={handleEdit} title="Edit Story" />
-            <Button onclick="" title="Delete Story" />
+            <Button click={handleRemove} title="Delete Story" />
         </DropDown>
     </div>
   )

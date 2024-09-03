@@ -15,7 +15,7 @@ import { toast } from "react-toastify"
 
 
 const HomeHeader = () => {
-  const { allUsers, userLoading, currentUser, setPublish, updateData } = Blog()
+  const { allUsers, userLoading, currentUser, setPublish, updateData, title, description } = Blog()
   const [modal, setModal] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -32,13 +32,13 @@ const HomeHeader = () => {
       setLoading(true)
       const ref = doc(db, "posts", postId);
       await updateDoc(ref, {
-        title: updateData.title,
-        desc: updateData.desc,
+        title,
+        desc: description,
       })
       navigate(`/post/${postId}`)
       toast.success("Post has been updated")
     } catch (error) {
-      
+      toast.error(error.message)
     } finally {
       setLoading(false)
     }
@@ -59,7 +59,9 @@ const HomeHeader = () => {
                 <button onClick={() => setPublish(true)} className=" btn !text-white !bg-green-700 py-1 !rounded-full">
                     Publish
                 </button> : editPath === "editPost" ? (
-                  <button className=" btn !text-white !bg-green-700 py-1 !rounded-full">Save and Update</button>
+                  <button onClick={handleEdit} className={`btn !text-white !bg-green-700 py-1 !rounded-full ${loading ? "opacity-40" : ""}`}>
+                    {loading ? "Updating..." : "Save and Edit"}
+                  </button>
                 ) : (
                     <Link className=" hidden md:flex items-center gap-1 text-gray-500" to={'/write'}>
                       <span className=" text-3xl"><LiaEditSolid /></span>

@@ -3,9 +3,7 @@ import ReactQuill from 'react-quill'
 import { Blog } from '../../../context/Context'
 
 const EditPost = () => {
-    const { updateData } = Blog()
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
+    const { updateData, description, setDescription, title, setTitle } = Blog()
 
     useEffect(() => {
         if (updateData) {
@@ -21,7 +19,7 @@ const EditPost = () => {
             placeholder=' Title...' 
             className=' text-4xl outline-none w-full' 
             value={title}
-            onChange={() => setTitle (e.target.value)}
+            onChange={(e) => setTitle (e.target.value)}
         />
         <ReactQuill 
             placeholder='Description...' 

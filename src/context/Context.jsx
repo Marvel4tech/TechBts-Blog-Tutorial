@@ -15,6 +15,8 @@ const Context = ({ children }) => {
     const [showComment, setShowComment] = useState(false);
     const [commentLength, setCommentLength] = useState(0);
     const [updateData, setUpdateData] = useState({})
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -47,7 +49,7 @@ const Context = ({ children }) => {
 
   return (
     <BlogContext.Provider value={{ currentUser, setCurrentUser, allUsers, userLoading, publish, setPublish, showComment,
-        setShowComment, commentLength, setCommentLength, updateData, setUpdateData }}>
+        setShowComment, commentLength, setCommentLength, updateData, setUpdateData, title, setTitle, description, setDescription }}>
         {loading ? <Loading /> : children}
     </BlogContext.Provider>
   )
