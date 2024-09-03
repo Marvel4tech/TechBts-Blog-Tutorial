@@ -33,7 +33,7 @@ const PostCard = ({ post }) => {
                 />
             </div>
             <div className='w-full md:w-[30%]'>
-                {postImg && <img src={postImg} alt="postImg" className=" h-[8rem] w-full object-cover " />}
+                {postImg && <img src={postImg} alt="postImg" className=" h-[16rem] md:h-[8rem] w-full object-cover " />}
             </div>
        </div>
        <div className=' flex items-center justify-between w-full md:w-[70%] mt-[2rem] md:mt-0'>
