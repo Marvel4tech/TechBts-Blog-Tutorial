@@ -1,10 +1,10 @@
-import React from 'react'
+/* import React from 'react'
 import { Blog } from '../../context/Context'
 import { BsGraphUpArrow } from 'react-icons/bs'
 
 const Trending = () => {
-  const { postData } = Blog()
-  const getTrending = postData?.sort((a, b) => b.pageViews - a.pageViews)
+  const { data } = Blog()
+  const getTrending = data?.sort((a, b) => b.pageViews - a.pageViews)
 
   return (
     <section className=' border-b border-gray-600'>
@@ -15,9 +15,21 @@ const Trending = () => {
                 </span>
                 <h2>Trending Posts</h2>
             </div>
+            <div className=' grid grid-cols-card gap-3'>
+                {getTrending.slice(0,6).map((trend, i) => (
+                  <Trend trend={trend} key={i} index={i} />
+                ))}
+            </div>
         </div>
     </section>
   )
 }
 
 export default Trending
+
+
+const Trend = () => {
+  return (
+    <h2>Hello</h2>
+  )
+} */

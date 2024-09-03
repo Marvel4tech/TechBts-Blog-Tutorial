@@ -5,7 +5,7 @@ import Auth from './Auth/Auth'
 
 const DemoHeader = () => {
     const [isActive, setIsActive] = useState(false)
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         const scrollMe = () => {
@@ -18,7 +18,7 @@ const DemoHeader = () => {
     }, [])
 
   return (
-    <header className={`border-b border-black sticky top-0 z-50 ${isActive ? "bg-white" : "bg-banner"} transition-all duration-500`}>
+    <header className={`border-b border-black sticky top-0 z-50 ${isActive ? "bg-white" : "font-black"} transition-all duration-500`}>
         <div className=' size h-[70px] flex items-center justify-between'>
            <div>
                 <Link className=' font-bold text-[2.5rem]' to={'/'}>TechBTS</Link>

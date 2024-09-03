@@ -50,7 +50,7 @@ const HomeHeader = () => {
       <div className=" size flex items-center justify-between h-[60px]">
           <div className=" flex items-center gap-3">
             <Link to={'/'}>
-                <span className=" text-5xl"><BsMedium /></span>
+                <span className=' font-bold text-[2.5rem]'>TechBTS</span>
             </Link>
           </div>
           <div className=" flex items-center gap-3 sm:gap-7">

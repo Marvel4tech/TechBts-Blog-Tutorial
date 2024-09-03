@@ -1,17 +1,17 @@
 export const nav = [
     {   
         id: 1,
-        title: "Our Story",
+        title: "Videos",
         path: "/",
     },
     {
         id: 2,
-        title: "Membership",
+        title: "Review",
         path: "/",
     },
     {
         id: 3,
-        title: "Write",
+        title: "Comparisons",
         path: "/",
     },
 ]
