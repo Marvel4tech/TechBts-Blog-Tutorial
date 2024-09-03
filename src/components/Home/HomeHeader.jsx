@@ -12,13 +12,24 @@ import Loading from "../Loading/Loading"
 
 
 const HomeHeader = () => {
-  const { allUsers, userLoading, currentUser, setPublish } = Blog()
+  const { allUsers, userLoading, currentUser, setPublish, updateData } = Blog()
   const [modal, setModal] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const { pathname } = useLocation()
   const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
 
   const editPath = pathname.split("/")[1];
+
+  const handleEdit = async () => {
+    try {
+      setLoading(true)
+    } catch (error) {
+      
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <header className=" border-gray-200 border-b">
