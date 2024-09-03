@@ -3,12 +3,15 @@ import { CiSearch } from "react-icons/ci"
 import { LiaEditSolid } from "react-icons/lia"
 import { IoMdNotificationsOutline } from "react-icons/io"
 import { MdKeyboardArrowDown } from "react-icons/md"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import Modal from "../../utilities/Modal"
 import { useState } from "react"
 import UserModal from "./UserModal"
 import { Blog } from "../../context/Context"
 import Loading from "../Loading/Loading"
+import { doc, updateDoc } from "@firebase/firestore"
+import { db } from "../../firebaseConfig/firebase"
+import { toast } from "react-toastify"
 
 
 const HomeHeader = () => {
@@ -20,10 +23,20 @@ const HomeHeader = () => {
   const getUserData = allUsers.find((user) => user.id === currentUser?.uid)
 
   const editPath = pathname.split("/")[1];
+  const postId = pathname.split("/")[2];
+
+  const navigate = useNavigate(null)
 
   const handleEdit = async () => {
     try {
       setLoading(true)
+      const ref = doc(db, "posts", postId);
+      await updateDoc(ref, {
+        title: updateData.title,
+        desc: updateData.desc,
+      })
+      navigate(`/post/${postId}`)
+      toast.success("Post has been updated")
     } catch (error) {
       
     } finally {
